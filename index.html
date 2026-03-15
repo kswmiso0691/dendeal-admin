@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Den.deal 관리</title>
+<title>Den.deal</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -12,59 +12,30 @@ body{font-family:'Noto Sans KR','Inter',sans-serif;background:#F0F1F5;color:#2D3
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 input,textarea,select{font-family:inherit}
 
-/* ===== LOGIN ===== */
-#loginScreen{
-  position:fixed;inset:0;z-index:9999;
-  background:#F0F1F5;
-  display:flex;align-items:center;justify-content:center;
-}
+/* LOGIN */
+#loginScreen{position:fixed;inset:0;z-index:9999;background:#F0F1F5;display:flex;align-items:center;justify-content:center}
 .login-card{width:100%;max-width:360px;padding:40px 24px;text-align:center}
 .login-logo{font-size:28px;font-weight:700;margin-bottom:4px}
 .login-logo .d{color:#2D3436}.login-logo .dot{color:#2563EB}
 .login-sub{font-size:13px;color:#9CA3AF;margin-bottom:32px}
-.login-input{
-  display:block;width:100%;padding:14px 16px;margin-bottom:12px;
-  border:1px solid #E5E7EB;border-radius:10px;font-size:14px;
-  outline:none;transition:border .2s;
-}
+.login-input{display:block;width:100%;padding:14px 16px;margin-bottom:12px;border:1px solid #E5E7EB;border-radius:10px;font-size:14px;outline:none;transition:border .2s}
 .login-input:focus{border-color:#0B6954}
-.login-btn{
-  display:block;width:100%;padding:14px;margin-top:4px;
-  background:#0B6954;color:#fff;border-radius:10px;
-  font-size:15px;font-weight:600;transition:background .2s;
-}
+.login-btn{display:block;width:100%;padding:14px;margin-top:4px;background:#0B6954;color:#fff;border-radius:10px;font-size:15px;font-weight:600}
 .login-btn:hover{background:#095443}
 .login-err{color:#ef4444;font-size:12px;margin-top:8px;min-height:18px}
 
-/* ===== APP ===== */
-#appShell{
-  display:none;
-  position:fixed;inset:0;z-index:1000;
-  justify-content:center;background:#F0F1F5;
-}
-.app-frame{
-  width:100%;max-width:480px;height:100%;
-  display:flex;flex-direction:column;
-  background:#fff;position:relative;
-  box-shadow:0 0 40px rgba(0,0,0,.08);
-}
+/* APP */
+#appShell{display:none;position:fixed;inset:0;z-index:1000;justify-content:center;background:#F0F1F5}
+.app-frame{width:100%;max-width:480px;height:100%;display:flex;flex-direction:column;background:#fff;position:relative;box-shadow:0 0 40px rgba(0,0,0,.08)}
 
 /* Top Bar */
-.topbar{
-  height:52px;background:#fff;
-  border-bottom:1px solid #f0f0f0;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 16px;flex-shrink:0;
-}
+.topbar{height:52px;background:#fff;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-shrink:0}
 .topbar-logo{font-size:18px;font-weight:700}
 .topbar-logo .dot{color:#2563EB}
-.topbar-role{font-size:11px;color:#fff;background:#0B6954;padding:2px 8px;border-radius:8px;margin-left:6px;font-weight:500}
-.topbar-role.member{background:#2563EB}
-.topbar-btn{
-  font-size:12px;color:#9CA3AF;padding:5px 12px;
-  border:1px solid #E5E7EB;border-radius:16px;
-}
-.topbar-btn:hover{color:#4B5563;border-color:#D1D5DB}
+.topbar-role{font-size:11px;color:#fff;padding:2px 8px;border-radius:8px;margin-left:6px;font-weight:500}
+.role-admin{background:#ef4444}
+.role-member{background:#0B6954}
+.topbar-btn{font-size:12px;color:#9CA3AF;padding:5px 12px;border:1px solid #E5E7EB;border-radius:16px}
 
 /* Content */
 .content{flex:1;overflow:hidden;position:relative}
@@ -72,195 +43,100 @@ input,textarea,select{font-family:inherit}
 .panel.active{display:block}
 
 /* Bottom Tabs */
-.bottombar{
-  height:60px;background:#fff;
-  border-top:1px solid #E5E7EB;
-  display:flex;flex-shrink:0;
-  padding-bottom:env(safe-area-inset-bottom,0);
-}
-.tab{
-  flex:1;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:3px;
-}
+.bottombar{height:60px;background:#fff;border-top:1px solid #E5E7EB;display:flex;flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0)}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
 .tab-icon{font-size:20px;opacity:.35;transition:all .2s}
 .tab-text{font-size:10px;color:#9CA3AF;font-weight:500;transition:color .2s}
 .tab.on .tab-icon{opacity:1}
 .tab.on .tab-text{color:#0B6954;font-weight:600}
 
-/* ===== 홈화면 (관리자) ===== */
-.home{padding:20px 16px}
-.home-welcome{
-  background:linear-gradient(135deg,#0B6954,#0d7d64);
-  border-radius:16px;padding:24px 20px;color:#fff;margin-bottom:20px;
-}
-.home-welcome.member-bg{background:linear-gradient(135deg,#2563EB,#3b82f6)}
-.home-welcome h2{font-size:18px;font-weight:700;margin-bottom:4px}
-.home-welcome p{font-size:13px;opacity:.8}
-.home-domain{
-  display:flex;align-items:center;gap:8px;margin-top:12px;
-  background:rgba(255,255,255,.15);border-radius:10px;padding:10px 14px;
-}
-.home-domain span{font-size:13px;flex:1}
-.home-domain button{
-  font-size:11px;color:#fff;padding:4px 12px;
-  border:1px solid rgba(255,255,255,.4);border-radius:10px;background:none;
-}
-.home-shortcuts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.home-shortcuts.col2{grid-template-columns:repeat(2,1fr)}
-.shortcut{
-  background:#f9fafb;border-radius:14px;padding:20px 10px;
-  text-align:center;border:1px solid #f3f4f6;transition:all .15s;
-}
-.shortcut:active{transform:scale(.96)}
-.shortcut-icon{font-size:30px;margin-bottom:8px}
-.shortcut-label{font-size:12px;font-weight:600;color:#374151}
-.home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+/* 공통 */
+.section-pad{padding:20px 16px}
+.card{background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid #f3f4f6}
+.welcome-card{background:linear-gradient(135deg,#0B6954,#0d7d64);border-radius:16px;padding:24px 20px;color:#fff;margin-bottom:20px;border:none}
+.welcome-card.admin-bg{background:linear-gradient(135deg,#1e293b,#334155)}
+.welcome-card h2{font-size:18px;font-weight:700;margin-bottom:4px}
+.welcome-card p{font-size:13px;opacity:.8}
+.shortcuts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.shortcuts.col2{grid-template-columns:repeat(2,1fr)}
+.sc{background:#f9fafb;border-radius:14px;padding:20px 10px;text-align:center;border:1px solid #f3f4f6;transition:all .15s}
+.sc:active{transform:scale(.96)}
+.sc-icon{font-size:30px;margin-bottom:8px}
+.sc-label{font-size:12px;font-weight:600;color:#374151}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .stat{background:#ECFDF5;border-radius:12px;padding:16px 8px;text-align:center}
+.stat.blue{background:#EFF6FF}
 .stat-val{font-size:24px;font-weight:700;color:#0B6954}
+.stat.blue .stat-val{color:#2563EB}
 .stat-lbl{font-size:11px;color:#6B7280;margin-top:2px}
 
-/* ===== 홈페이지 편집 ===== */
-.edit{padding:20px 16px}
-.edit h2{font-size:17px;font-weight:700;margin-bottom:16px}
-.edit-section{
-  background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:12px;
-  border:1px solid #f3f4f6;
-}
-.edit-section-title{font-size:14px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.edit-field{margin-bottom:12px}
-.edit-field label{display:block;font-size:12px;color:#6B7280;margin-bottom:4px;font-weight:500}
-.edit-field input,.edit-field textarea,.edit-field select{
-  width:100%;padding:10px 12px;border:1px solid #E5E7EB;border-radius:8px;
-  font-size:13px;outline:none;resize:vertical;
-}
-.edit-field input:focus,.edit-field textarea:focus{border-color:#0B6954}
-.edit-save{
-  display:block;width:100%;padding:13px;margin-top:8px;
-  background:#0B6954;color:#fff;border-radius:10px;
-  font-size:14px;font-weight:600;
-}
-.edit-save:hover{background:#095443}
+/* 편집 */
+.edit-title{font-size:14px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12px;color:#6B7280;margin-bottom:4px;font-weight:500}
+.field input,.field textarea,.field select{width:100%;padding:10px 12px;border:1px solid #E5E7EB;border-radius:8px;font-size:13px;outline:none;resize:vertical}
+.field input:focus,.field textarea:focus{border-color:#0B6954}
+.btn-primary{display:block;width:100%;padding:13px;background:#0B6954;color:#fff;border-radius:10px;font-size:14px;font-weight:600}
+.btn-primary:hover{background:#095443}
 
-/* ===== 회원문의관리 (관리자) ===== */
-.inq{padding:20px 16px}
+/* 문의 */
 .inq-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .inq-header h2{font-size:17px;font-weight:700}
-.inq-badge{
-  background:#0B6954;color:#fff;font-size:11px;font-weight:600;
-  padding:3px 10px;border-radius:10px;
-}
-.inq-empty{text-align:center;padding:50px 0;color:#9CA3AF}
-.inq-empty-icon{font-size:48px;margin-bottom:12px;opacity:.5}
-.inq-empty-text{font-size:14px}
-.inq-item{
-  background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:10px;
-  border:1px solid #f3f4f6;cursor:pointer;transition:all .15s;
-}
+.badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px;color:#fff;background:#0B6954}
+.empty{text-align:center;padding:50px 0;color:#9CA3AF}
+.empty-icon{font-size:48px;margin-bottom:12px;opacity:.5}
+.empty-text{font-size:14px}
+.inq-item{background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:10px;border:1px solid #f3f4f6;cursor:pointer;transition:all .15s}
 .inq-item:hover{background:#f3f4f6}
 .inq-item-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .inq-item-name{font-size:14px;font-weight:600}
 .inq-item-date{font-size:11px;color:#9CA3AF}
 .inq-item-msg{font-size:13px;color:#6B7280;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.inq-item-detail{
-  display:none;margin-top:12px;padding-top:12px;
-  border-top:1px solid #E5E7EB;font-size:13px;color:#374151;line-height:1.7;
-}
+.inq-item-detail{display:none;margin-top:12px;padding-top:12px;border-top:1px solid #E5E7EB;font-size:13px;color:#374151;line-height:1.7}
 .inq-item.open .inq-item-msg{white-space:normal}
 .inq-item.open .inq-item-detail{display:block}
-.inq-item-status{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:600}
+.status-tag{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:600}
 .status-new{background:#FEF3C7;color:#92400E}
 .status-done{background:#D1FAE5;color:#065F46}
 
-/* ===== 회원 문의하기 폼 ===== */
-.inq-form{padding:20px 16px}
-.inq-form h2{font-size:17px;font-weight:700;margin-bottom:16px}
-.inq-form-section{
-  background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid #f3f4f6;
-}
-.inq-form-field{margin-bottom:12px}
-.inq-form-field label{display:block;font-size:12px;color:#6B7280;margin-bottom:4px;font-weight:500}
-.inq-form-field input,.inq-form-field textarea{
-  width:100%;padding:10px 12px;border:1px solid #E5E7EB;border-radius:8px;
-  font-size:13px;outline:none;resize:vertical;
-}
-.inq-form-field input:focus,.inq-form-field textarea:focus{border-color:#2563EB}
-.inq-submit{
-  display:block;width:100%;padding:13px;margin-top:8px;
-  background:#2563EB;color:#fff;border-radius:10px;
-  font-size:14px;font-weight:600;
-}
-.inq-submit:hover{background:#1d4ed8}
-.my-inq-list{margin-top:20px}
-.my-inq-list h3{font-size:15px;font-weight:600;margin-bottom:10px}
-
-/* ===== 미리보기 ===== */
-.preview{padding:20px 16px}
-.preview h2{font-size:17px;font-weight:700;margin-bottom:16px}
-.preview-card{
-  background:#f9fafb;border-radius:14px;overflow:hidden;
-  border:1px solid #f3f4f6;margin-bottom:16px;
-}
-.preview-browser{
-  background:#2D3436;padding:8px 14px;
-  display:flex;align-items:center;gap:6px;
-}
-.preview-dot{width:8px;height:8px;border-radius:50%}
-.preview-dot.r{background:#ff5f57}.preview-dot.y{background:#ffbd2e}.preview-dot.g{background:#28c840}
-.preview-url{
-  flex:1;margin-left:8px;background:#1a1a2e;border-radius:4px;
-  padding:4px 10px;font-size:11px;color:#9CA3AF;
-}
-.preview-body{height:320px;display:flex;align-items:center;justify-content:center;background:#fff}
+/* 미리보기 */
+.preview-card{background:#f9fafb;border-radius:14px;overflow:hidden;border:1px solid #f3f4f6;margin-bottom:16px}
+.preview-browser{background:#2D3436;padding:8px 14px;display:flex;align-items:center;gap:6px}
+.pdot{width:8px;height:8px;border-radius:50%}
+.pdot.r{background:#ff5f57}.pdot.y{background:#ffbd2e}.pdot.g{background:#28c840}
+.preview-url{flex:1;margin-left:8px;background:#1a1a2e;border-radius:4px;padding:4px 10px;font-size:11px;color:#9CA3AF}
+.preview-body{height:320px;background:#fff}
 .preview-body iframe{width:100%;height:100%;border:none}
-.preview-actions{display:flex;gap:10px;margin-top:4px}
-.preview-btn{
-  flex:1;padding:13px;border-radius:10px;font-size:13px;font-weight:600;text-align:center;
-}
-.preview-btn.primary{background:#0B6954;color:#fff}
-.preview-btn.secondary{background:#f3f4f6;color:#374151}
-.preview-btn:hover{opacity:.9}
+.preview-actions{display:flex;gap:10px}
+.pbtn{flex:1;padding:13px;border-radius:10px;font-size:13px;font-weight:600;text-align:center}
+.pbtn.pri{background:#0B6954;color:#fff}
+.pbtn.sec{background:#f3f4f6;color:#374151}
 
-/* ===== 마이페이지 ===== */
-.mypage{padding:20px 16px}
-.mypage-profile{
-  background:#f9fafb;border-radius:14px;padding:24px;text-align:center;
-  margin-bottom:16px;border:1px solid #f3f4f6;
-}
-.mypage-avatar{
-  width:64px;height:64px;border-radius:50%;
-  background:#2563EB;color:#fff;font-size:24px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;margin:0 auto 12px;
-}
-.mypage-name{font-size:16px;font-weight:700;margin-bottom:2px}
-.mypage-id{font-size:13px;color:#9CA3AF}
-.mypage-menu{margin-top:8px}
-.mypage-item{
-  display:flex;align-items:center;gap:12px;
-  padding:14px;background:#f9fafb;border-radius:10px;margin-bottom:8px;
-  cursor:pointer;transition:background .15s;border:1px solid #f3f4f6;
-}
-.mypage-item:hover{background:#f3f4f6}
-.mypage-item-icon{font-size:20px}
-.mypage-item-text{flex:1;font-size:14px;font-weight:500}
-.mypage-item-arrow{color:#D1D5DB;font-size:18px}
-.mypage-item.danger .mypage-item-text{color:#ef4444}
+/* 회원관리 */
+.member-item{background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:10px;border:1px solid #f3f4f6;display:flex;align-items:center;gap:14px}
+.member-avatar{width:42px;height:42px;border-radius:50%;background:#0B6954;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0}
+.member-info{flex:1}
+.member-name{font-size:14px;font-weight:600}
+.member-detail{font-size:12px;color:#9CA3AF}
+.member-actions{display:flex;gap:6px}
+.member-actions button{font-size:11px;padding:5px 10px;border-radius:8px;font-weight:500}
+.mbtn-view{background:#EFF6FF;color:#2563EB}
+.mbtn-del{background:#FEF2F2;color:#ef4444}
 
-/* ===== PC 배경 ===== */
-.pc-bg{
-  position:fixed;top:50%;left:calc((50% - 240px)/2);
-  transform:translate(-50%,-50%);z-index:999;pointer-events:none;text-align:center;
-}
+/* 도메인/링크 */
+.domain-box{display:flex;align-items:center;gap:8px;margin-top:12px;background:rgba(255,255,255,.15);border-radius:10px;padding:10px 14px}
+.domain-box span{font-size:13px;flex:1}
+.domain-box button{font-size:11px;color:#fff;padding:4px 12px;border:1px solid rgba(255,255,255,.4);border-radius:10px;background:none}
+
+/* PC 배경 */
+.pc-bg{position:fixed;top:50%;left:calc((50% - 240px)/2);transform:translate(-50%,-50%);z-index:999;pointer-events:none;text-align:center}
 .pc-bg .brand{font-size:36px;font-weight:800;color:#2D3436}
 .pc-bg .brand .dot{color:#2563EB}
 .pc-bg .sub{font-size:11px;color:#9CA3AF;margin-top:6px}
 @media(max-width:1080px){.pc-bg{display:none}}
 
 /* Toast */
-.toast{
-  position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:#1F2937;color:#fff;padding:10px 20px;border-radius:20px;
-  font-size:13px;opacity:0;transition:all .3s;z-index:99999;pointer-events:none;
-}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#1F2937;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;transition:all .3s;z-index:99999;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
@@ -282,194 +158,136 @@ input,textarea,select{font-family:inherit}
 
 <!-- APP -->
 <div id="appShell">
-  <div class="pc-bg">
-    <div class="brand">Den<span class="dot">.</span>deal</div>
-    <div class="sub">치과 디지털 플랫폼</div>
-  </div>
-
+  <div class="pc-bg"><div class="brand">Den<span class="dot">.</span>deal</div><div class="sub">치과 디지털 플랫폼</div></div>
   <div class="app-frame">
     <div class="topbar">
-      <div class="topbar-logo">Den<span class="dot">.</span>deal<span class="topbar-role" id="roleTag">관리자</span></div>
+      <div class="topbar-logo">Den<span class="dot">.</span>deal<span class="topbar-role" id="roleTag"></span></div>
       <button class="topbar-btn" onclick="window._logout()">로그아웃</button>
     </div>
-
     <div class="content">
 
-      <!-- ============ 관리자 패널들 ============ -->
-      <!-- 관리자 홈 -->
-      <div class="panel" id="panelAdminHome">
-        <div class="home">
-          <div class="home-welcome">
-            <h2>안녕하세요, 관리자님</h2>
-            <p>오늘도 Den.deal과 함께하세요</p>
-            <div class="home-domain">
-              <span>dendeal.kr</span>
+      <!-- ===== 관리자: 홈 ===== -->
+      <div class="panel" id="pAdminHome">
+        <div class="section-pad">
+          <div class="welcome-card admin-bg">
+            <h2>Den.deal 관리자</h2>
+            <p>가입 회원을 관리합니다</p>
+          </div>
+          <div class="stats" style="margin-bottom:20px">
+            <div class="stat blue"><div class="stat-val" id="sMemberCnt">0</div><div class="stat-lbl">전체 회원</div></div>
+            <div class="stat"><div class="stat-val" id="sActiveCnt">0</div><div class="stat-lbl">활성 회원</div></div>
+            <div class="stat blue"><div class="stat-val" id="sTotalInq">0</div><div class="stat-lbl">총 문의</div></div>
+          </div>
+          <div class="shortcuts col2">
+            <button class="sc" onclick="window._switchTab(1)"><div class="sc-icon">👥</div><div class="sc-label">회원관리</div></button>
+            <button class="sc" onclick="window._switchTab(2)"><div class="sc-icon">⚙️</div><div class="sc-label">설정</div></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 관리자: 회원관리 ===== -->
+      <div class="panel" id="pAdminMembers">
+        <div class="section-pad">
+          <div class="inq-header">
+            <h2>👥 회원관리</h2>
+            <span class="badge" id="memberBadge">0명</span>
+          </div>
+          <div id="memberList"></div>
+        </div>
+      </div>
+
+      <!-- ===== 관리자: 설정 ===== -->
+      <div class="panel" id="pAdminSett">
+        <div class="section-pad">
+          <h2 style="font-size:17px;font-weight:700;margin-bottom:16px">⚙️ 설정</h2>
+          <div class="card" style="cursor:pointer" onclick="window._logout()">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="font-size:20px">🚪</span>
+              <div><div style="font-size:14px;font-weight:500;color:#ef4444">로그아웃</div><div style="font-size:12px;color:#9CA3AF">관리자 계정에서 로그아웃</div></div>
+            </div>
+          </div>
+          <div style="text-align:center;padding:24px 0;font-size:12px;color:#D1D5DB">Den.deal Admin v1.0</div>
+        </div>
+      </div>
+
+      <!-- ===== 회원: 홈 ===== -->
+      <div class="panel" id="pMemberHome">
+        <div class="section-pad">
+          <div class="welcome-card">
+            <h2 id="memberGreeting">안녕하세요</h2>
+            <p>홈페이지를 관리해보세요</p>
+            <div class="domain-box">
+              <span id="memberDomain">dendeal.kr</span>
               <button onclick="window._copyLink()">링크복사</button>
             </div>
           </div>
-          <div class="home-shortcuts">
-            <button class="shortcut" onclick="window._switchTab(1)">
-              <div class="shortcut-icon">✏️</div>
-              <div class="shortcut-label">홈페이지 편집</div>
-            </button>
-            <button class="shortcut" onclick="window._switchTab(2)">
-              <div class="shortcut-icon">💬</div>
-              <div class="shortcut-label">회원문의</div>
-            </button>
-            <button class="shortcut" onclick="window._switchTab(3)">
-              <div class="shortcut-icon">👁️</div>
-              <div class="shortcut-label">미리보기</div>
-            </button>
+          <div class="shortcuts">
+            <button class="sc" onclick="window._switchTab(1)"><div class="sc-icon">✏️</div><div class="sc-label">홈페이지 편집</div></button>
+            <button class="sc" onclick="window._switchTab(2)"><div class="sc-icon">💬</div><div class="sc-label">회원문의</div></button>
+            <button class="sc" onclick="window._switchTab(3)"><div class="sc-icon">👁️</div><div class="sc-label">미리보기</div></button>
           </div>
-          <div class="home-stats">
-            <div class="stat"><div class="stat-val" id="sInq">0</div><div class="stat-lbl">문의 접수</div></div>
-            <div class="stat"><div class="stat-val" id="sPopup">0</div><div class="stat-lbl">활성 팝업</div></div>
-            <div class="stat"><div class="stat-val" id="sImg">0</div><div class="stat-lbl">등록 이미지</div></div>
+          <div class="stats">
+            <div class="stat"><div class="stat-val" id="mInq">0</div><div class="stat-lbl">문의 접수</div></div>
+            <div class="stat"><div class="stat-val" id="mPopup">0</div><div class="stat-lbl">활성 팝업</div></div>
+            <div class="stat"><div class="stat-val" id="mImg">0</div><div class="stat-lbl">등록 이미지</div></div>
           </div>
         </div>
       </div>
 
-      <!-- 관리자 편집 -->
-      <div class="panel" id="panelAdminEdit">
-        <div class="edit">
-          <h2>✏️ 홈페이지 편집</h2>
-          <div class="edit-section">
-            <div class="edit-section-title">📌 기본 정보</div>
-            <div class="edit-field"><label>치과 이름</label><input type="text" id="editName" placeholder="치과 이름을 입력하세요"></div>
-            <div class="edit-field"><label>전화번호</label><input type="tel" id="editPhone" placeholder="031-000-0000"></div>
-            <div class="edit-field"><label>주소</label><input type="text" id="editAddr" placeholder="주소를 입력하세요"></div>
+      <!-- ===== 회원: 홈페이지 편집 ===== -->
+      <div class="panel" id="pMemberEdit">
+        <div class="section-pad">
+          <h2 style="font-size:17px;font-weight:700;margin-bottom:16px">✏️ 홈페이지 편집</h2>
+          <div class="card">
+            <div class="edit-title">📌 기본 정보</div>
+            <div class="field"><label>치과 이름</label><input type="text" id="editName" placeholder="치과 이름을 입력하세요"></div>
+            <div class="field"><label>전화번호</label><input type="tel" id="editPhone" placeholder="031-000-0000"></div>
+            <div class="field"><label>주소</label><input type="text" id="editAddr" placeholder="주소를 입력하세요"></div>
           </div>
-          <div class="edit-section">
-            <div class="edit-section-title">🕐 진료시간</div>
-            <div class="edit-field"><label>평일</label><input type="text" id="editWeekday" placeholder="09:00 ~ 18:00"></div>
-            <div class="edit-field"><label>토요일</label><input type="text" id="editSat" placeholder="09:00 ~ 13:00"></div>
-            <div class="edit-field"><label>점심시간</label><input type="text" id="editLunch" placeholder="13:00 ~ 14:00"></div>
+          <div class="card">
+            <div class="edit-title">🕐 진료시간</div>
+            <div class="field"><label>평일</label><input type="text" id="editWeekday" placeholder="09:00 ~ 18:00"></div>
+            <div class="field"><label>토요일</label><input type="text" id="editSat" placeholder="09:00 ~ 13:00"></div>
+            <div class="field"><label>점심시간</label><input type="text" id="editLunch" placeholder="13:00 ~ 14:00"></div>
           </div>
-          <div class="edit-section">
-            <div class="edit-section-title">📝 소개글</div>
-            <div class="edit-field"><label>홈페이지 소개</label><textarea id="editIntro" rows="4" placeholder="홈페이지에 표시될 소개글을 입력하세요"></textarea></div>
+          <div class="card">
+            <div class="edit-title">📝 소개글</div>
+            <div class="field"><label>홈페이지 소개</label><textarea id="editIntro" rows="4" placeholder="홈페이지에 표시될 소개글을 입력하세요"></textarea></div>
           </div>
-          <button class="edit-save" onclick="window._saveEdit()">저장하기</button>
+          <button class="btn-primary" onclick="window._saveEdit()">저장하기</button>
         </div>
       </div>
 
-      <!-- 관리자 문의관리 -->
-      <div class="panel" id="panelAdminInq">
-        <div class="inq">
+      <!-- ===== 회원: 회원문의관리 ===== -->
+      <div class="panel" id="pMemberInq">
+        <div class="section-pad">
           <div class="inq-header">
             <h2>💬 회원문의관리</h2>
-            <span class="inq-badge" id="inqBadge">0건</span>
+            <span class="badge" id="inqBadge">0건</span>
           </div>
           <div id="inqList"></div>
         </div>
       </div>
 
-      <!-- 관리자 미리보기 -->
-      <div class="panel" id="panelAdminPreview">
-        <div class="preview">
-          <h2>👁️ 홈페이지 미리보기</h2>
+      <!-- ===== 회원: 미리보기 ===== -->
+      <div class="panel" id="pMemberPreview">
+        <div class="section-pad">
+          <h2 style="font-size:17px;font-weight:700;margin-bottom:16px">👁️ 홈페이지 미리보기</h2>
           <div class="preview-card">
             <div class="preview-browser">
-              <div class="preview-dot r"></div><div class="preview-dot y"></div><div class="preview-dot g"></div>
+              <div class="pdot r"></div><div class="pdot y"></div><div class="pdot g"></div>
               <div class="preview-url">dendeal.kr</div>
             </div>
             <div class="preview-body"><iframe src="https://dendeal.kr" id="previewFrame"></iframe></div>
           </div>
           <div class="preview-actions">
-            <button class="preview-btn secondary" onclick="document.getElementById('previewFrame').src='https://dendeal.kr'">🔄 새로고침</button>
-            <button class="preview-btn primary" onclick="window.open('https://dendeal.kr','_blank')">🔗 새 탭에서 열기</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============ 회원 패널들 ============ -->
-      <!-- 회원 홈 -->
-      <div class="panel" id="panelMemberHome">
-        <div class="home">
-          <div class="home-welcome member-bg">
-            <h2>안녕하세요, 회원님</h2>
-            <p>Den.deal에 오신 것을 환영합니다</p>
-          </div>
-          <div class="home-shortcuts col2">
-            <button class="shortcut" onclick="window._switchTab(1)">
-              <div class="shortcut-icon">💬</div>
-              <div class="shortcut-label">문의하기</div>
-            </button>
-            <button class="shortcut" onclick="window._switchTab(2)">
-              <div class="shortcut-icon">👁️</div>
-              <div class="shortcut-label">홈페이지 보기</div>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 회원 문의하기 -->
-      <div class="panel" id="panelMemberInq">
-        <div class="inq-form">
-          <h2>💬 문의하기</h2>
-          <div class="inq-form-section">
-            <div class="inq-form-field"><label>이름</label><input type="text" id="mqName" placeholder="이름을 입력하세요"></div>
-            <div class="inq-form-field"><label>연락처</label><input type="tel" id="mqPhone" placeholder="010-0000-0000"></div>
-            <div class="inq-form-field"><label>이메일</label><input type="email" id="mqEmail" placeholder="email@example.com"></div>
-            <div class="inq-form-field"><label>문의 내용</label><textarea id="mqMsg" rows="5" placeholder="문의 내용을 입력하세요"></textarea></div>
-          </div>
-          <button class="inq-submit" onclick="window._submitInq()">문의 보내기</button>
-          <div class="my-inq-list">
-            <h3>📋 내 문의 내역</h3>
-            <div id="myInqList"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 회원 미리보기 -->
-      <div class="panel" id="panelMemberPreview">
-        <div class="preview">
-          <h2>👁️ 홈페이지 보기</h2>
-          <div class="preview-card">
-            <div class="preview-browser">
-              <div class="preview-dot r"></div><div class="preview-dot y"></div><div class="preview-dot g"></div>
-              <div class="preview-url">dendeal.kr</div>
-            </div>
-            <div class="preview-body"><iframe src="https://dendeal.kr" id="memberPreviewFrame"></iframe></div>
-          </div>
-          <div class="preview-actions">
-            <button class="preview-btn secondary" onclick="document.getElementById('memberPreviewFrame').src='https://dendeal.kr'">🔄 새로고침</button>
-            <button class="preview-btn primary" onclick="window.open('https://dendeal.kr','_blank')">🔗 새 탭에서 열기</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 회원 마이페이지 -->
-      <div class="panel" id="panelMemberMypage">
-        <div class="mypage">
-          <div class="mypage-profile">
-            <div class="mypage-avatar">T</div>
-            <div class="mypage-name">회원</div>
-            <div class="mypage-id">test</div>
-          </div>
-          <div class="mypage-menu">
-            <div class="mypage-item" onclick="window._switchTab(1)">
-              <div class="mypage-item-icon">💬</div>
-              <div class="mypage-item-text">내 문의 내역</div>
-              <div class="mypage-item-arrow">›</div>
-            </div>
-            <div class="mypage-item" onclick="window._switchTab(2)">
-              <div class="mypage-item-icon">👁️</div>
-              <div class="mypage-item-text">홈페이지 보기</div>
-              <div class="mypage-item-arrow">›</div>
-            </div>
-            <div class="mypage-item danger" onclick="window._logout()">
-              <div class="mypage-item-icon">🚪</div>
-              <div class="mypage-item-text">로그아웃</div>
-              <div class="mypage-item-arrow">›</div>
-            </div>
+            <button class="pbtn sec" onclick="document.getElementById('previewFrame').src='https://dendeal.kr'">🔄 새로고침</button>
+            <button class="pbtn pri" onclick="window.open('https://dendeal.kr','_blank')">🔗 새 탭에서 열기</button>
           </div>
         </div>
       </div>
 
     </div>
-
-    <!-- Bottom Tabs (동적 변경) -->
     <div class="bottombar" id="bottombar"></div>
   </div>
 </div>
@@ -480,7 +298,7 @@ input,textarea,select{font-family:inherit}
 (function(){
   var ACCOUNTS={
     admin:{pw:'admin123',role:'admin',name:'관리자'},
-    test:{pw:'test123',role:'member',name:'회원'}
+    test:{pw:'test123',role:'member',name:'테스트치과'}
   };
 
   var loginScreen=document.getElementById('loginScreen');
@@ -490,75 +308,72 @@ input,textarea,select{font-family:inherit}
   var bottombar=document.getElementById('bottombar');
   var roleTag=document.getElementById('roleTag');
 
-  var currentRole='';
-  var currentPanels=[];
-  var currentTabs=[];
+  var currentRole='',currentUser='',currentPanels=[];
 
-  var adminPanels=['panelAdminHome','panelAdminEdit','panelAdminInq','panelAdminPreview'];
-  var adminTabs=[
-    {icon:'🏠',text:'홈'},
-    {icon:'✏️',text:'편집'},
-    {icon:'💬',text:'문의'},
-    {icon:'👁️',text:'미리보기'}
-  ];
+  var adminPanels=['pAdminHome','pAdminMembers','pAdminSett'];
+  var adminTabs=[{icon:'🏠',text:'홈'},{icon:'👥',text:'회원관리'},{icon:'⚙️',text:'설정'}];
 
-  var memberPanels=['panelMemberHome','panelMemberInq','panelMemberPreview','panelMemberMypage'];
-  var memberTabs=[
-    {icon:'🏠',text:'홈'},
-    {icon:'💬',text:'문의'},
-    {icon:'👁️',text:'보기'},
-    {icon:'👤',text:'마이'}
-  ];
+  var memberPanels=['pMemberHome','pMemberEdit','pMemberInq','pMemberPreview'];
+  var memberTabs=[{icon:'🏠',text:'홈'},{icon:'✏️',text:'편집'},{icon:'💬',text:'문의'},{icon:'👁️',text:'미리보기'}];
 
-  function toast(msg){
-    toastEl.textContent=msg;
-    toastEl.classList.add('show');
-    setTimeout(function(){toastEl.classList.remove('show')},2000);
-  }
+  function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');setTimeout(function(){toastEl.classList.remove('show')},2000)}
 
-  function buildTabs(tabList){
-    var html='';
-    tabList.forEach(function(t,i){
-      html+='<button class="tab'+(i===0?' on':'')+'" onclick="window._switchTab('+i+')">'
-        +'<span class="tab-icon">'+t.icon+'</span><span class="tab-text">'+t.text+'</span></button>';
-    });
-    bottombar.innerHTML=html;
+  function buildTabs(list){
+    var h='';
+    list.forEach(function(t,i){h+='<button class="tab'+(i===0?' on':'')+'" onclick="window._switchTab('+i+')"><span class="tab-icon">'+t.icon+'</span><span class="tab-text">'+t.text+'</span></button>'});
+    bottombar.innerHTML=h;
   }
 
   window._switchTab=function(idx){
-    currentPanels.forEach(function(id,i){
-      document.getElementById(id).classList.toggle('active',i===idx);
-    });
-    var tabs=document.querySelectorAll('.tab');
-    tabs.forEach(function(t,i){t.classList.toggle('on',i===idx)});
-    if(currentRole==='admin'){
-      if(idx===0) refreshStats();
-      if(idx===2) refreshInq();
-    }
-    if(currentRole==='member' && idx===1) refreshMyInq();
+    currentPanels.forEach(function(id,i){document.getElementById(id).classList.toggle('active',i===idx)});
+    document.querySelectorAll('.tab').forEach(function(t,i){t.classList.toggle('on',i===idx)});
+    if(currentRole==='admin'){if(idx===0)refreshAdminStats();if(idx===1)refreshMembers()}
+    if(currentRole==='member'){if(idx===0)refreshMemberStats();if(idx===2)refreshInq()}
   };
 
-  function enterApp(role){
+  function getMembers(){return JSON.parse(localStorage.getItem('dd_members')||'[]')}
+  function saveMembers(m){localStorage.setItem('dd_members',JSON.stringify(m))}
+
+  // 회원 등록 확인 (첫 로그인 시 자동 등록)
+  function ensureMember(id,name){
+    var m=getMembers();
+    var found=false;
+    m.forEach(function(x){if(x.id===id)found=true});
+    if(!found){
+      var now=new Date();
+      var date=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+      m.push({id:id,name:name,date:date,status:'active'});
+      saveMembers(m);
+    }
+  }
+
+  function enterApp(role,userId){
     currentRole=role;
+    currentUser=userId;
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
+
     if(role==='admin'){
       currentPanels=adminPanels;
       buildTabs(adminTabs);
       roleTag.textContent='관리자';
-      roleTag.className='topbar-role';
-      loadEdit();
+      roleTag.className='topbar-role role-admin';
+      document.getElementById(currentPanels[0]).classList.add('active');
+      refreshAdminStats();
+      refreshMembers();
     }else{
       currentPanels=memberPanels;
       buildTabs(memberTabs);
       roleTag.textContent='회원';
-      roleTag.className='topbar-role member';
+      roleTag.className='topbar-role role-member';
+      document.getElementById(currentPanels[0]).classList.add('active');
+      var acc=ACCOUNTS[userId];
+      document.getElementById('memberGreeting').textContent='안녕하세요, '+acc.name+'님';
+      ensureMember(userId,acc.name);
+      loadEdit(userId);
+      refreshMemberStats();
     }
-    // 모든 패널 숨기기
-    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
-    // 첫 패널 활성화
-    document.getElementById(currentPanels[0]).classList.add('active');
     loginScreen.style.display='none';
     appShell.style.display='flex';
-    if(role==='admin') refreshStats();
   }
 
   // 로그인
@@ -566,11 +381,11 @@ input,textarea,select{font-family:inherit}
     var id=document.getElementById('inpId').value.trim();
     var pw=document.getElementById('inpPw').value;
     var acc=ACCOUNTS[id];
-    if(acc && acc.pw===pw){
+    if(acc&&acc.pw===pw){
       sessionStorage.setItem('dd_user',id);
       sessionStorage.setItem('dd_role',acc.role);
-      enterApp(acc.role);
-      toast(acc.name+'님 환영합니다');
+      enterApp(acc.role,id);
+      toast(acc.name+' 로그인');
     }else{
       loginErr.textContent='아이디 또는 비밀번호가 올바르지 않습니다.';
       document.getElementById('inpPw').value='';
@@ -580,27 +395,56 @@ input,textarea,select{font-family:inherit}
   document.getElementById('inpPw').addEventListener('keydown',function(e){if(e.key==='Enter')window._doLogin()});
   document.getElementById('inpId').addEventListener('keydown',function(e){if(e.key==='Enter')window._doLogin()});
 
-  // 로그아웃
-  window._logout=function(){
-    if(confirm('로그아웃 하시겠습니까?')){
-      sessionStorage.clear();
-      location.reload();
-    }
-  };
+  window._logout=function(){if(confirm('로그아웃 하시겠습니까?')){sessionStorage.clear();location.reload()}};
 
-  // 링크복사
   window._copyLink=function(){
     var url='https://dendeal.kr';
-    if(navigator.clipboard){
-      navigator.clipboard.writeText(url).then(function(){toast('링크가 복사되었습니다')});
-    }else{
-      var ta=document.createElement('textarea');ta.value=url;
-      document.body.appendChild(ta);ta.select();document.execCommand('copy');
-      document.body.removeChild(ta);toast('링크가 복사되었습니다');
-    }
+    if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast('링크가 복사되었습니다')})}
+    else{var ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('링크가 복사되었습니다')}
   };
 
-  // 편집 저장
+  // ===== 관리자 기능 =====
+  function refreshAdminStats(){
+    var m=getMembers();
+    var active=m.filter(function(x){return x.status==='active'});
+    var inqs=JSON.parse(localStorage.getItem('dd_inq_all')||'[]');
+    document.getElementById('sMemberCnt').textContent=m.length;
+    document.getElementById('sActiveCnt').textContent=active.length;
+    document.getElementById('sTotalInq').textContent=inqs.length;
+  }
+
+  function refreshMembers(){
+    var m=getMembers();
+    var el=document.getElementById('memberList');
+    document.getElementById('memberBadge').textContent=m.length+'명';
+    if(!m.length){el.innerHTML='<div class="empty"><div class="empty-icon">👥</div><div class="empty-text">등록된 회원이 없습니다</div></div>';return}
+    var h='';
+    m.forEach(function(x,i){
+      var initial=x.name.charAt(0);
+      h+='<div class="member-item">'
+        +'<div class="member-avatar">'+initial+'</div>'
+        +'<div class="member-info"><div class="member-name">'+x.name+'</div><div class="member-detail">ID: '+x.id+' · 가입: '+x.date+' · '+(x.status==='active'?'활성':'비활성')+'</div></div>'
+        +'<div class="member-actions">'
+        +'<button class="mbtn-del" onclick="window._delMember('+i+')">삭제</button>'
+        +'</div></div>';
+    });
+    el.innerHTML=h;
+  }
+
+  window._delMember=function(i){
+    if(!confirm('이 회원을 삭제하시겠습니까?'))return;
+    var m=getMembers();m.splice(i,1);saveMembers(m);
+    refreshMembers();refreshAdminStats();toast('회원이 삭제되었습니다');
+  };
+
+  // ===== 회원 기능 =====
+  function refreshMemberStats(){
+    var inqs=JSON.parse(localStorage.getItem('dd_inq_'+currentUser)||'[]');
+    document.getElementById('mInq').textContent=inqs.length;
+    document.getElementById('mPopup').textContent='0';
+    document.getElementById('mImg').textContent='0';
+  }
+
   window._saveEdit=function(){
     var data={
       name:document.getElementById('editName').value,
@@ -611,11 +455,12 @@ input,textarea,select{font-family:inherit}
       lunch:document.getElementById('editLunch').value,
       intro:document.getElementById('editIntro').value
     };
-    localStorage.setItem('siteEdit',JSON.stringify(data));
+    localStorage.setItem('dd_edit_'+currentUser,JSON.stringify(data));
     toast('저장되었습니다');
   };
-  function loadEdit(){
-    var d=JSON.parse(localStorage.getItem('siteEdit')||'{}');
+
+  function loadEdit(userId){
+    var d=JSON.parse(localStorage.getItem('dd_edit_'+userId)||'{}');
     if(d.name)document.getElementById('editName').value=d.name;
     if(d.phone)document.getElementById('editPhone').value=d.phone;
     if(d.addr)document.getElementById('editAddr').value=d.addr;
@@ -625,88 +470,27 @@ input,textarea,select{font-family:inherit}
     if(d.intro)document.getElementById('editIntro').value=d.intro;
   }
 
-  // 통계
-  function refreshStats(){
-    var inqs=JSON.parse(localStorage.getItem('inquiries')||'[]');
-    document.getElementById('sInq').textContent=inqs.length;
-    document.getElementById('sPopup').textContent='0';
-    document.getElementById('sImg').textContent='0';
-  }
-
-  // 관리자 문의목록
   function refreshInq(){
-    var inqs=JSON.parse(localStorage.getItem('inquiries')||'[]');
+    var inqs=JSON.parse(localStorage.getItem('dd_inq_'+currentUser)||'[]');
     var el=document.getElementById('inqList');
     document.getElementById('inqBadge').textContent=inqs.length+'건';
-    if(!inqs.length){
-      el.innerHTML='<div class="inq-empty"><div class="inq-empty-icon">📭</div><div class="inq-empty-text">접수된 문의가 없습니다</div></div>';
-      return;
-    }
-    var html='';
-    inqs.forEach(function(q,i){
+    if(!inqs.length){el.innerHTML='<div class="empty"><div class="empty-icon">📭</div><div class="empty-text">접수된 문의가 없습니다</div></div>';return}
+    var h='';
+    inqs.forEach(function(q){
       var st=q.status==='done'?'done':'new';
-      html+='<div class="inq-item" onclick="this.classList.toggle(\'open\')">'
-        +'<div class="inq-item-top">'
-        +'<span class="inq-item-name">'+(q.name||'익명')+'</span>'
-        +'<span class="inq-item-status status-'+st+'">'+(st==='done'?'답변완료':'새문의')+'</span>'
-        +'</div>'
-        +'<div style="font-size:11px;color:#9CA3AF;margin-bottom:4px">'+(q.date||'')+'</div>'
+      h+='<div class="inq-item" onclick="this.classList.toggle(\'open\')">'
+        +'<div class="inq-item-top"><span class="inq-item-name">'+(q.name||'익명')+'</span><span class="status-tag status-'+st+'">'+(st==='done'?'답변완료':'새문의')+'</span></div>'
+        +'<div class="inq-item-date">'+(q.date||'')+'</div>'
         +'<div class="inq-item-msg">'+(q.message||'')+'</div>'
-        +'<div class="inq-item-detail">'
-        +(q.phone?'📞 '+q.phone+'<br>':'')
-        +(q.email?'✉️ '+q.email+'<br>':'')
-        +'<br>'+(q.message||'')
-        +'</div></div>';
+        +'<div class="inq-item-detail">'+(q.phone?'📞 '+q.phone+'<br>':'')+(q.email?'✉️ '+q.email+'<br>':'')+'<br>'+(q.message||'')+'</div></div>';
     });
-    el.innerHTML=html;
-  }
-
-  // 회원 문의 보내기
-  window._submitInq=function(){
-    var name=document.getElementById('mqName').value.trim();
-    var phone=document.getElementById('mqPhone').value.trim();
-    var email=document.getElementById('mqEmail').value.trim();
-    var msg=document.getElementById('mqMsg').value.trim();
-    if(!name||!msg){toast('이름과 문의 내용을 입력하세요');return}
-    var inqs=JSON.parse(localStorage.getItem('inquiries')||'[]');
-    var now=new Date();
-    var date=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0')+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-    inqs.push({name:name,phone:phone,email:email,message:msg,date:date,status:'new',user:'test'});
-    localStorage.setItem('inquiries',JSON.stringify(inqs));
-    document.getElementById('mqName').value='';
-    document.getElementById('mqPhone').value='';
-    document.getElementById('mqEmail').value='';
-    document.getElementById('mqMsg').value='';
-    toast('문의가 접수되었습니다');
-    refreshMyInq();
-  };
-
-  // 회원 내 문의내역
-  function refreshMyInq(){
-    var inqs=JSON.parse(localStorage.getItem('inquiries')||'[]');
-    var my=inqs.filter(function(q){return q.user==='test'});
-    var el=document.getElementById('myInqList');
-    if(!my.length){el.innerHTML='<div class="inq-empty" style="padding:20px 0"><div class="inq-empty-text">문의 내역이 없습니다</div></div>';return}
-    var html='';
-    my.forEach(function(q){
-      var st=q.status==='done'?'done':'new';
-      html+='<div class="inq-item">'
-        +'<div class="inq-item-top">'
-        +'<span class="inq-item-name">'+(q.date||'')+'</span>'
-        +'<span class="inq-item-status status-'+st+'">'+(st==='done'?'답변완료':'접수중')+'</span>'
-        +'</div>'
-        +'<div class="inq-item-msg" style="white-space:normal">'+(q.message||'')+'</div>'
-        +'</div>';
-    });
-    el.innerHTML=html;
+    el.innerHTML=h;
   }
 
   // 초기화
   var savedUser=sessionStorage.getItem('dd_user');
   var savedRole=sessionStorage.getItem('dd_role');
-  if(savedUser && savedRole){
-    enterApp(savedRole);
-  }
+  if(savedUser&&savedRole) enterApp(savedRole,savedUser);
 })();
 </script>
 </body>

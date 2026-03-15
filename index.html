@@ -209,7 +209,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     <div>
       <input class="login-input" type="text" id="inpId" placeholder="아이디">
       <input class="login-input" type="password" id="inpPw" placeholder="비밀번호">
-      <button class="login-btn" type="button" id="loginBtn">로그인</button>
+      <button class="login-btn" type="button" onclick="window._doLogin()">로그인</button>
       <div class="login-err" id="loginErr"></div>
     </div>
   </div>
@@ -329,7 +329,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 
   var loginScreen=document.getElementById('loginScreen');
   var appShell=document.getElementById('appShell');
-  var loginBtn=document.getElementById('loginBtn');
   var loginErr=document.getElementById('loginErr');
   var toastEl=document.getElementById('toast');
   var dendealIframe=document.getElementById('dendealIframe');
@@ -398,8 +397,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     }
   }
 
-  // 로그인 버튼 클릭 + 엔터키
-  loginBtn.addEventListener('click',doLogin);
+  // 전역에 로그인 함수 노출 + 엔터키
+  window._doLogin=doLogin;
   document.getElementById('inpPw').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
   document.getElementById('inpId').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
 

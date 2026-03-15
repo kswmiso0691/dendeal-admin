@@ -206,12 +206,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   <div class="login-card">
     <div class="login-logo"><span class="d">Den</span><span class="dot">.</span><span class="d">deal</span></div>
     <p class="login-sub">관리자 로그인</p>
-    <form id="loginForm">
-      <input class="login-input" type="text" id="inpId" placeholder="아이디" autocomplete="username">
-      <input class="login-input" type="password" id="inpPw" placeholder="비밀번호" autocomplete="current-password">
-      <button class="login-btn" type="submit">로그인</button>
+    <div>
+      <input class="login-input" type="text" id="inpId" placeholder="아이디">
+      <input class="login-input" type="password" id="inpPw" placeholder="비밀번호">
+      <button class="login-btn" type="button" id="loginBtn">로그인</button>
       <div class="login-err" id="loginErr"></div>
-    </form>
+    </div>
   </div>
 </div>
 
@@ -329,7 +329,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 
   var loginScreen=document.getElementById('loginScreen');
   var appShell=document.getElementById('appShell');
-  var loginForm=document.getElementById('loginForm');
+  var loginBtn=document.getElementById('loginBtn');
   var loginErr=document.getElementById('loginErr');
   var toastEl=document.getElementById('toast');
   var dendealIframe=document.getElementById('dendealIframe');
@@ -398,9 +398,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     }
   }
 
-  // form submit + 버튼 클릭 둘 다 처리
-  loginForm.addEventListener('submit',function(e){e.preventDefault();doLogin()});
-  document.querySelector('.login-btn').addEventListener('click',function(e){e.preventDefault();doLogin()});
+  // 로그인 버튼 클릭 + 엔터키
+  loginBtn.addEventListener('click',doLogin);
+  document.getElementById('inpPw').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
+  document.getElementById('inpId').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
 
   // 로그아웃
   function doLogout(){

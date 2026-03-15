@@ -854,87 +854,112 @@ input,textarea,select{font-family:inherit}
     s+='<style>';
     s+='#'+uid+' img{max-width:100%}';
     s+='@media(min-width:768px){';
-    s+='#'+uid+' .tp-hero{height:360px!important}';
-    s+='#'+uid+' .tp-hero-title{font-size:32px!important}';
-    s+='#'+uid+' .tp-doc-img{width:100px!important;height:100px!important}';
+    s+='#'+uid+' .tp-hero{height:520px!important}';
+    s+='#'+uid+' .tp-hero-title{font-size:42px!important}';
+    s+='#'+uid+' .tp-hero-tag{font-size:14px!important}';
+    s+='#'+uid+' .tp-hero-desc{font-size:16px!important}';
+    s+='#'+uid+' .tp-doc-img{width:140px!important;height:140px!important}';
+    s+='#'+uid+' .tp-doc-name{font-size:16px!important}';
+    s+='#'+uid+' .tp-doc-spec{font-size:13px!important}';
     s+='#'+uid+' .tp-dept{grid-template-columns:repeat(3,1fr)!important}';
+    s+='#'+uid+' .tp-dept-item{padding:28px 10px!important}';
+    s+='#'+uid+' .tp-dept-name{font-size:15px!important}';
     s+='#'+uid+' .tp-case{grid-template-columns:repeat(4,1fr)!important}';
-    s+='#'+uid+' .tp-fac-item{flex:0 0 30%!important;height:120px!important}';
-    s+='#'+uid+' .tp-review{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:10px!important}';
-    s+='#'+uid+' .tp-sec{padding:40px 32px!important}';
-    s+='#'+uid+' .tp-nav-links{font-size:12px!important;gap:16px!important}';
+    s+='#'+uid+' .tp-case-img{height:160px!important}';
+    s+='#'+uid+' .tp-case-name{font-size:14px!important}';
+    s+='#'+uid+' .tp-fac-item{flex:0 0 30%!important;height:200px!important}';
+    s+='#'+uid+' .tp-fac-label{font-size:14px!important}';
+    s+='#'+uid+' .tp-review{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:12px!important}';
+    s+='#'+uid+' .tp-review-txt{font-size:14px!important}';
+    s+='#'+uid+' .tp-review-who{font-size:13px!important}';
+    s+='#'+uid+' .tp-sec{padding:60px 48px!important}';
+    s+='#'+uid+' .tp-sec-label{font-size:13px!important}';
+    s+='#'+uid+' .tp-sec-title{font-size:24px!important;margin-bottom:24px!important}';
+    s+='#'+uid+' .tp-nav{padding:16px 32px!important}';
+    s+='#'+uid+' .tp-nav-logo{font-size:22px!important}';
+    s+='#'+uid+' .tp-nav-links{font-size:14px!important;gap:20px!important}';
+    s+='#'+uid+' .tp-about-txt{font-size:22px!important}';
+    s+='#'+uid+' .tp-about-label{font-size:13px!important}';
+    s+='#'+uid+' .tp-notice-title{font-size:15px!important}';
+    s+='#'+uid+' .tp-notice-date{font-size:12px!important}';
     s+='#'+uid+' .tp-reserve-btns{flex-direction:row!important}';
+    s+='#'+uid+' .tp-reserve-btn{font-size:16px!important;padding:18px!important}';
+    s+='#'+uid+' .tp-hours-row{font-size:16px!important}';
+    s+='#'+uid+' .tp-map-area{height:240px!important}';
+    s+='#'+uid+' .tp-map-info{font-size:14px!important}';
+    s+='#'+uid+' .tp-map-btn{font-size:13px!important;padding:8px 20px!important}';
+    s+='#'+uid+' .tp-footer-name{font-size:18px!important}';
+    s+='#'+uid+' .tp-footer-info{font-size:12px!important}';
     s+='}</style>';
     // 1. 네비게이션
-    s+='<div style="background:'+d.nav+';padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,.06)">'
-      +'<div style="font-size:15px;font-weight:800;color:'+d.navTxt+'">'+N+'</div>'
+    s+='<div class="tp-nav" style="background:'+d.nav+';padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,.06)">'
+      +'<div class="tp-nav-logo" style="font-size:15px;font-weight:800;color:'+d.navTxt+'">'+N+'</div>'
       +'<div class="tp-nav-links" style="display:flex;gap:8px;font-size:9px;color:'+d.navTxt+';opacity:.6;flex-wrap:wrap;justify-content:flex-end;max-width:60%">'
       +'<span>홈</span><span>치과소개</span><span>대표원장</span><span>진료과목</span><span>치료사례</span><span>병원시설</span><span>환자후기</span><span>오시는길</span></div></div>';
-    // 2. 히어로 (이미지)
+    // 2. 히어로
     s+='<div style="position:relative;overflow:hidden">'
-      +'<img class="tp-hero" src="'+d.heroImg+'" alt="'+N+'" style="width:100%;height:260px;object-fit:cover;display:block">'
+      +'<img class="tp-hero" src="'+d.heroImg+'" alt="'+N+'" style="width:100%;height:320px;object-fit:cover;display:block">'
       +'<div style="position:absolute;inset:0;background:'+d.heroOverlay+';display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center">'
-      +'<div style="font-size:10px;color:'+d.heroSub+';letter-spacing:3px;margin-bottom:10px">'+d.heroTag+'</div>'
+      +'<div class="tp-hero-tag" style="font-size:10px;color:'+d.heroSub+';letter-spacing:3px;margin-bottom:10px">'+d.heroTag+'</div>'
       +'<div class="tp-hero-title" style="font-size:22px;font-weight:800;color:'+d.heroTxt+';line-height:1.4;margin-bottom:8px">'+d.heroTitle+'</div>'
       +'<div style="width:40px;height:2px;background:'+d.accent+';margin:0 auto 14px"></div>'
-      +'<div style="font-size:12px;color:'+d.heroSub+';line-height:1.7">'+d.heroDesc+'</div></div></div>';
+      +'<div class="tp-hero-desc" style="font-size:12px;color:'+d.heroSub+';line-height:1.7">'+d.heroDesc+'</div></div></div>';
     // 3. 치과소개
     s+='<div class="tp-sec" style="background:'+d.accent+';padding:28px 20px;text-align:center">'
-      +'<div style="font-size:10px;color:rgba(255,255,255,.6);letter-spacing:2px;margin-bottom:8px">ABOUT US</div>'
-      +'<div style="font-size:16px;font-weight:700;color:#fff;line-height:1.6">'+d.intro+'</div></div>';
-    // 4. 대표원장 (사진)
+      +'<div class="tp-about-label" style="font-size:10px;color:rgba(255,255,255,.6);letter-spacing:2px;margin-bottom:8px">ABOUT US</div>'
+      +'<div class="tp-about-txt" style="font-size:16px;font-weight:700;color:#fff;line-height:1.6">'+d.intro+'</div></div>';
+    // 4. 대표원장
     s+='<div class="tp-sec" style="padding:28px 20px;background:'+d.docBg+';text-align:center">'
-      +'<div style="font-size:10px;color:'+d.docDescC+';letter-spacing:2px;margin-bottom:6px">DIRECTOR</div>'
-      +'<div style="font-size:14px;font-weight:700;color:'+d.docTitle+';margin-bottom:16px">'+d.docLabel+'</div>'
-      +'<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">';
+      +'<div class="tp-sec-label" style="font-size:10px;color:'+d.docDescC+';letter-spacing:2px;margin-bottom:6px">DIRECTOR</div>'
+      +'<div class="tp-sec-title" style="font-size:14px;font-weight:700;color:'+d.docTitle+';margin-bottom:16px">'+d.docLabel+'</div>'
+      +'<div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap">';
     d.docs.forEach(function(dc){
-      s+='<div><img class="tp-doc-img" src="'+dc[0]+'" alt="'+dc[1]+'" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto 8px;display:block;border:2px solid '+d.docAvBd+'">'
-        +'<div style="font-size:12px;font-weight:600;color:'+d.docNameC+'">'+dc[1]+'</div>'
-        +'<div style="font-size:10px;color:'+d.docDescC+'">'+dc[2]+'</div></div>';
+      s+='<div><img class="tp-doc-img" src="'+dc[0]+'" alt="'+dc[1]+'" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 8px;display:block;border:3px solid '+d.docAvBd+'">'
+        +'<div class="tp-doc-name" style="font-size:13px;font-weight:600;color:'+d.docNameC+'">'+dc[1]+'</div>'
+        +'<div class="tp-doc-spec" style="font-size:11px;color:'+d.docDescC+'">'+dc[2]+'</div></div>';
     });
     s+='</div></div>';
-    // 5. 진료과목 (3x2)
+    // 5. 진료과목
     s+='<div class="tp-sec" style="padding:28px 16px;background:'+d.secBg+'">'
-      +'<div style="font-size:10px;color:'+d.cardTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">TREATMENT</div>'
-      +'<div style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:16px">진료과목</div>'
+      +'<div class="tp-sec-label" style="font-size:10px;color:'+d.cardTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">TREATMENT</div>'
+      +'<div class="tp-sec-title" style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:16px">진료과목</div>'
       +'<div class="tp-dept" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">';
     d.depts.forEach(function(dp){
-      s+='<div style="background:'+d.cardBg+';border-radius:10px;padding:18px 6px;text-align:center;border:1px solid '+d.cardBd+'">'
-        +'<div style="font-size:24px;margin-bottom:6px">'+dp[0]+'</div>'
-        +'<div style="font-size:11px;font-weight:600;color:'+d.cardTxt+'">'+dp[1]+'</div></div>';
+      s+='<div class="tp-dept-item" style="background:'+d.cardBg+';border-radius:10px;padding:20px 6px;text-align:center;border:1px solid '+d.cardBd+'">'
+        +'<div class="tp-dept-name" style="font-size:12px;font-weight:600;color:'+d.cardTxt+'">'+dp[1]+'</div></div>';
     });
     s+='</div></div>';
-    // 6. 치료사례 (이미지)
+    // 6. 치료사례
     s+='<div class="tp-sec" style="padding:24px 16px;background:'+d.tourBg+'">'
-      +'<div style="font-size:10px;color:'+d.tourTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">CASES</div>'
-      +'<div style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:14px">치료사례</div>'
+      +'<div class="tp-sec-label" style="font-size:10px;color:'+d.tourTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">CASES</div>'
+      +'<div class="tp-sec-title" style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:14px">치료사례</div>'
       +'<div class="tp-case" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">';
-    var cases=[['🔩','임플란트'],['😁','치아교정'],['✨','미백치료'],['💎','심미보철']];
+    var cases=['임플란트','치아교정','미백치료','심미보철'];
     cases.forEach(function(c){
       s+='<div style="background:'+d.tourCard+';border-radius:10px;overflow:hidden">'
-        +'<img src="'+d.caseImg+'" alt="'+c[1]+'" style="width:100%;height:80px;object-fit:cover;display:block">'
-        +'<div style="padding:10px;text-align:center"><div style="font-size:16px;margin-bottom:2px">'+c[0]+'</div>'
-        +'<div style="font-size:10px;font-weight:600;color:'+d.tourTxt+'">'+c[1]+'</div>'
+        +'<img class="tp-case-img" src="'+d.caseImg+'" alt="'+c+'" style="width:100%;height:100px;object-fit:cover;display:block">'
+        +'<div style="padding:10px;text-align:center">'
+        +'<div class="tp-case-name" style="font-size:11px;font-weight:600;color:'+d.tourTxt+'">'+c+'</div>'
         +'<div style="font-size:9px;color:'+d.tourTxt+';opacity:.6;margin-top:2px">Before → After</div></div></div>';
     });
     s+='</div></div>';
-    // 7. 병원시설 (사진)
+    // 7. 병원시설
     s+='<div class="tp-sec" style="padding:24px 16px;background:'+d.secBg+'">'
-      +'<div style="font-size:10px;color:'+d.cardTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">FACILITIES</div>'
-      +'<div style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:14px">병원시설</div>'
+      +'<div class="tp-sec-label" style="font-size:10px;color:'+d.cardTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">FACILITIES</div>'
+      +'<div class="tp-sec-title" style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:14px">병원시설</div>'
       +'<div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:4px">';
     var facLabels=['진료실','대기실','상담실'];
     d.facImgs.forEach(function(fi,i){
-      s+='<div class="tp-fac-item" style="flex:0 0 42%;height:75px;border-radius:10px;overflow:hidden;position:relative">'
+      s+='<div class="tp-fac-item" style="flex:0 0 42%;height:100px;border-radius:10px;overflow:hidden;position:relative">'
         +'<img src="'+fi+'" alt="'+facLabels[i]+'" style="width:100%;height:100%;object-fit:cover">'
-        +'<div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.6));padding:6px 10px">'
-        +'<div style="font-size:11px;color:#fff;font-weight:500">'+facLabels[i]+'</div></div></div>';
+        +'<div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.6));padding:8px 10px">'
+        +'<div class="tp-fac-label" style="font-size:12px;color:#fff;font-weight:500">'+facLabels[i]+'</div></div></div>';
     });
     s+='</div></div>';
     // 8. 환자후기
     s+='<div class="tp-sec" style="padding:24px 16px;background:'+d.tourBg+'">'
-      +'<div style="font-size:10px;color:'+d.tourTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">REVIEWS</div>'
-      +'<div style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:14px">환자후기</div>'
+      +'<div class="tp-sec-label" style="font-size:10px;color:'+d.tourTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">REVIEWS</div>'
+      +'<div class="tp-sec-title" style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:14px">환자후기</div>'
       +'<div class="tp-review">';
     var reviews=[
       {star:'★★★★★',txt:'임플란트 상담이 너무 친절했습니다. 비용도 합리적이고 결과도 만족스럽습니다.',who:'김○○',tx:'임플란트'},
@@ -946,36 +971,36 @@ input,textarea,select{font-family:inherit}
         +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'
         +'<div style="font-size:12px;color:#f59e0b">'+r.star+'</div>'
         +'<div style="font-size:9px;padding:2px 8px;border-radius:6px;background:'+d.accent+';color:#fff">'+r.tx+'</div></div>'
-        +'<div style="font-size:11px;color:'+d.secTxt+';line-height:1.6;margin-bottom:4px">'+r.txt+'</div>'
-        +'<div style="font-size:10px;color:'+d.tourTxt+';opacity:.6">- '+r.who+'</div></div>';
+        +'<div class="tp-review-txt" style="font-size:11px;color:'+d.secTxt+';line-height:1.6;margin-bottom:4px">'+r.txt+'</div>'
+        +'<div class="tp-review-who" style="font-size:10px;color:'+d.tourTxt+';opacity:.6">- '+r.who+'</div></div>';
     });
     s+='</div></div>';
     // 9. 공지사항
     s+='<div class="tp-sec" style="padding:24px 16px;background:'+d.secBg+'">'
-      +'<div style="font-size:10px;color:'+d.cardTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">NOTICE</div>'
-      +'<div style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:14px">공지사항</div>'
+      +'<div class="tp-sec-label" style="font-size:10px;color:'+d.cardTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">NOTICE</div>'
+      +'<div class="tp-sec-title" style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:14px">공지사항</div>'
       +'<div style="background:'+d.cardBg+';border-radius:10px;padding:12px 14px;margin-bottom:6px;border:1px solid '+d.cardBd+';display:flex;justify-content:space-between;align-items:center">'
-      +'<div style="font-size:12px;color:'+d.secTxt+';font-weight:500">3월 진료시간 변경 안내</div>'
-      +'<div style="font-size:10px;color:'+d.tourTxt+';opacity:.6">2026.03.10</div></div>'
+      +'<div class="tp-notice-title" style="font-size:12px;color:'+d.secTxt+';font-weight:500">3월 진료시간 변경 안내</div>'
+      +'<div class="tp-notice-date" style="font-size:10px;color:'+d.tourTxt+';opacity:.6">2026.03.10</div></div>'
       +'<div style="background:'+d.cardBg+';border-radius:10px;padding:12px 14px;margin-bottom:6px;border:1px solid '+d.cardBd+';display:flex;justify-content:space-between;align-items:center">'
-      +'<div style="font-size:12px;color:'+d.secTxt+';font-weight:500">설 연휴 휴진 안내</div>'
-      +'<div style="font-size:10px;color:'+d.tourTxt+';opacity:.6">2026.01.20</div></div>'
+      +'<div class="tp-notice-title" style="font-size:12px;color:'+d.secTxt+';font-weight:500">설 연휴 휴진 안내</div>'
+      +'<div class="tp-notice-date" style="font-size:10px;color:'+d.tourTxt+';opacity:.6">2026.01.20</div></div>'
       +'</div>';
     // 10. 예약안내
     s+='<div class="tp-sec" style="padding:24px 16px;background:'+d.tourBg+'">'
-      +'<div style="font-size:10px;color:'+d.tourTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">RESERVATION</div>'
-      +'<div style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:6px">빠른 상담 예약</div>'
+      +'<div class="tp-sec-label" style="font-size:10px;color:'+d.tourTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">RESERVATION</div>'
+      +'<div class="tp-sec-title" style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:6px">빠른 상담 예약</div>'
       +'<div style="font-size:12px;color:'+d.tourTxt+';text-align:center;margin-bottom:16px">전화 : 02-000-0000</div>'
       +'<div class="tp-reserve-btns" style="display:flex;flex-direction:column;gap:8px">'
-      +'<div style="background:#FEE500;color:#3C1E1E;padding:14px;border-radius:10px;text-align:center;font-size:13px;font-weight:600;flex:1">💬 카카오톡 상담</div>'
-      +'<div style="background:'+d.accent+';color:#fff;padding:14px;border-radius:10px;text-align:center;font-size:13px;font-weight:600;flex:1">📞 전화 예약</div>'
-      +'<div style="background:'+d.mapBtnBg+';color:'+d.mapBtnC+';padding:14px;border-radius:10px;text-align:center;font-size:13px;font-weight:600;flex:1">📋 온라인 예약</div>'
+      +'<div class="tp-reserve-btn" style="background:#FEE500;color:#3C1E1E;padding:14px;border-radius:10px;text-align:center;font-size:13px;font-weight:600;flex:1">카카오톡 상담</div>'
+      +'<div class="tp-reserve-btn" style="background:'+d.accent+';color:#fff;padding:14px;border-radius:10px;text-align:center;font-size:13px;font-weight:600;flex:1">전화 예약</div>'
+      +'<div class="tp-reserve-btn" style="background:'+d.mapBtnBg+';color:'+d.mapBtnC+';padding:14px;border-radius:10px;text-align:center;font-size:13px;font-weight:600;flex:1">온라인 예약</div>'
       +'</div></div>';
     // 11. 진료시간
     s+='<div class="tp-sec" style="padding:24px 20px;background:'+d.timeBg+'">'
-      +'<div style="font-size:10px;color:'+d.timeTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">HOURS</div>'
-      +'<div style="font-size:14px;font-weight:700;color:'+d.timeTitleC+';text-align:center;margin-bottom:12px">진료시간 안내</div>'
-      +'<div style="font-size:12px;color:'+d.timeTxt+';line-height:2.2;max-width:400px;margin:0 auto">'
+      +'<div class="tp-sec-label" style="font-size:10px;color:'+d.timeTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">HOURS</div>'
+      +'<div class="tp-sec-title" style="font-size:14px;font-weight:700;color:'+d.timeTitleC+';text-align:center;margin-bottom:12px">진료시간 안내</div>'
+      +'<div class="tp-hours-row" style="font-size:12px;color:'+d.timeTxt+';line-height:2.2;max-width:500px;margin:0 auto">'
       +'<div style="display:flex;justify-content:space-between;padding:4px 16px;border-bottom:1px solid rgba(0,0,0,.05)"><span>평일</span><span>09:00 ~ 18:00</span></div>'
       +'<div style="display:flex;justify-content:space-between;padding:4px 16px;border-bottom:1px solid rgba(0,0,0,.05)"><span>토요일</span><span>09:00 ~ 13:00</span></div>'
       +'<div style="display:flex;justify-content:space-between;padding:4px 16px;border-bottom:1px solid rgba(0,0,0,.05)"><span>점심시간</span><span>13:00 ~ 14:00</span></div>'
@@ -983,25 +1008,25 @@ input,textarea,select{font-family:inherit}
       +'</div></div>';
     // 12. 오시는 길
     s+='<div class="tp-sec" style="padding:24px 16px;background:'+d.mapBg+'">'
-      +'<div style="font-size:10px;color:'+d.mapTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">LOCATION</div>'
-      +'<div style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:14px">오시는 길</div>'
-      +'<div style="height:120px;background:'+d.mapCard+';border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;color:'+d.mapTxt+';margin-bottom:12px;overflow:hidden;position:relative">'
+      +'<div class="tp-sec-label" style="font-size:10px;color:'+d.mapTxt+';letter-spacing:2px;text-align:center;margin-bottom:6px">LOCATION</div>'
+      +'<div class="tp-sec-title" style="font-size:14px;font-weight:700;color:'+d.secTxt+';text-align:center;margin-bottom:14px">오시는 길</div>'
+      +'<div class="tp-map-area" style="height:140px;background:'+d.mapCard+';border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;color:'+d.mapTxt+';margin-bottom:12px;overflow:hidden;position:relative">'
       +'<img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&q=80&fit=crop" alt="지도" style="width:100%;height:100%;object-fit:cover;opacity:.4">'
-      +'<div style="position:absolute;font-size:13px;color:'+d.mapTxt+';font-weight:600">📍 지도 영역</div></div>'
-      +'<div style="background:'+d.cardBg+';border-radius:10px;padding:14px;border:1px solid '+d.cardBd+';font-size:11px;color:'+d.secTxt+';line-height:1.8">'
-      +'<div style="margin-bottom:4px">📍 서울시 OO구 OO로 123, '+N+'</div>'
-      +'<div style="margin-bottom:4px">🚇 지하철 O호선 OO역 O번출구 도보 5분</div>'
-      +'<div style="margin-bottom:4px">🚌 버스 OOO, OOO번 OO정류장 하차</div>'
-      +'<div>🅿️ 건물 내 주차 가능 (2시간 무료)</div></div>'
+      +'<div style="position:absolute;font-size:13px;color:'+d.mapTxt+';font-weight:600">지도 영역</div></div>'
+      +'<div class="tp-map-info" style="background:'+d.cardBg+';border-radius:10px;padding:14px;border:1px solid '+d.cardBd+';font-size:11px;color:'+d.secTxt+';line-height:1.8">'
+      +'<div style="margin-bottom:4px">서울시 OO구 OO로 123, '+N+'</div>'
+      +'<div style="margin-bottom:4px">지하철 O호선 OO역 O번출구 도보 5분</div>'
+      +'<div style="margin-bottom:4px">버스 OOO, OOO번 OO정류장 하차</div>'
+      +'<div>건물 내 주차 가능 (2시간 무료)</div></div>'
       +'<div style="display:flex;gap:6px;margin-top:10px;justify-content:center">'
-      +'<div style="font-size:10px;padding:6px 14px;border-radius:8px;background:'+d.mapBtnBg+';color:'+d.mapBtnC+'">네이버지도</div>'
-      +'<div style="font-size:10px;padding:6px 14px;border-radius:8px;background:'+d.mapBtnBg+';color:'+d.mapBtnC+'">카카오맵</div>'
-      +'<div style="font-size:10px;padding:6px 14px;border-radius:8px;background:'+d.mapBtnBg+';color:'+d.mapBtnC+'">구글맵</div>'
+      +'<div class="tp-map-btn" style="font-size:10px;padding:6px 14px;border-radius:8px;background:'+d.mapBtnBg+';color:'+d.mapBtnC+'">네이버지도</div>'
+      +'<div class="tp-map-btn" style="font-size:10px;padding:6px 14px;border-radius:8px;background:'+d.mapBtnBg+';color:'+d.mapBtnC+'">카카오맵</div>'
+      +'<div class="tp-map-btn" style="font-size:10px;padding:6px 14px;border-radius:8px;background:'+d.mapBtnBg+';color:'+d.mapBtnC+'">구글맵</div>'
       +'</div></div>';
     // 푸터
     s+='<div style="background:'+d.footBg+';padding:24px 16px;text-align:center">'
-      +'<div style="font-size:14px;font-weight:700;color:'+d.footTxt+';margin-bottom:8px">'+N+'</div>'
-      +'<div style="font-size:10px;color:'+d.footSub+';line-height:1.8">대표원장 : 홍길동 | 사업자등록번호 : 000-00-00000<br>주소 : 서울시 OO구 OO로 123<br>대표전화 : 02-000-0000 | 개인정보보호책임자 : 홍길동</div>'
+      +'<div class="tp-footer-name" style="font-size:14px;font-weight:700;color:'+d.footTxt+';margin-bottom:8px">'+N+'</div>'
+      +'<div class="tp-footer-info" style="font-size:10px;color:'+d.footSub+';line-height:1.8">대표원장 : 홍길동 | 사업자등록번호 : 000-00-00000<br>주소 : 서울시 OO구 OO로 123<br>대표전화 : 02-000-0000 | 개인정보보호책임자 : 홍길동</div>'
       +'<div style="font-size:9px;color:'+d.footSub+';margin-top:10px;opacity:.5">ⓒ 2026 '+N+'. All Rights Reserved.</div></div>';
     s+='</div>';
     return s;
@@ -1020,21 +1045,21 @@ input,textarea,select{font-family:inherit}
       desc:'블루 컬러 기반의 클래식 디자인입니다. 파란색이 주는 신뢰감과 전문성을 강조하며, 히어로 → 소개 → 진료과목 → 의료진 → 시설 → 진료안내 → 오시는 길 순서의 정석적인 치과 홈페이지입니다.',
       features:['반응형 디자인 (PC/모바일)','히어로 배너 이미지 + 치과소개','대표원장 프로필 사진','진료과목 3x2 그리드','치료사례 Before/After 이미지','병원시설 사진 갤러리','환자후기 (별점+치료내용)','공지사항 게시판','예약안내 (전화/카카오/온라인)','오시는 길 (지도/주차/지하철/버스)'],
       colors:['#1a6cbe','#ffffff','#f0f6fc','#333333','#d6d6d6'],
-      data:{nav:'#fff',navTxt:'#1a6cbe',heroImg:'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80&fit=crop',heroOverlay:'rgba(255,255,255,.6)',heroTag:'DENTAL CLINIC',heroTxt:'#1a6cbe',heroSub:'#6B7280',heroTitle:'기본 원칙을 지키며<br>정직하게 진료합니다',heroDesc:'환자 한 분 한 분께 최선을 다하는<br>신뢰받는 치과가 되겠습니다',accent:'#1a6cbe',intro:'기본원칙을 지키며<br>정직하게 진료합니다',secBg:'#fff',secTxt:'#333',deptTitle:'진료과목',depts:[['🦷','일반진료'],['🔩','임플란트'],['😁','치아교정'],['✨','심미치료'],['🦠','사랑니발치'],['🪥','예방치료']],cardBg:'#f0f6fc',cardBd:'#e2ecf5',cardTxt:'#1a6cbe',docBg:'#d6d6d6',docLabel:'의료진 소개',docTitle:'#333',docs:[[IMG_DOC_M,'대표원장','일반/임플란트'],[IMG_DOC_F,'부원장','교정/심미']],docAvBd:'#1a6cbe',docNameC:'#333',docDescC:'#6B7280',caseImg:'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=400&q=80&fit=crop',facImgs:[IMG_FAC1,IMG_FAC2,IMG_FAC3],tourBg:'#f8fafc',tourCard:'#e8f2fc',tourTxt:'#1a6cbe',timeBg:'#fff',timeTitleC:'#333',timeTxt:'#585a5c',mapBg:'#f8fafc',mapCard:'#e8f2fc',mapTxt:'#1a6cbe',mapBtnBg:'#1a6cbe',mapBtnC:'#fff',footBg:'#e8f2fc',footTxt:'#1a6cbe',footSub:'#6B7280'}
+      data:{nav:'#fff',navTxt:'#1a6cbe',heroImg:'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80&fit=crop',heroOverlay:'rgba(255,255,255,.6)',heroTag:'DENTAL CLINIC',heroTxt:'#1a6cbe',heroSub:'#6B7280',heroTitle:'기본 원칙을 지키며<br>정직하게 진료합니다',heroDesc:'환자 한 분 한 분께 최선을 다하는<br>신뢰받는 치과가 되겠습니다',accent:'#1a6cbe',intro:'기본원칙을 지키며<br>정직하게 진료합니다',secBg:'#fff',secTxt:'#333',deptTitle:'진료과목',depts:[['','일반진료'],['','임플란트'],['','치아교정'],['','심미치료'],['','사랑니발치'],['','예방치료']],cardBg:'#f0f6fc',cardBd:'#e2ecf5',cardTxt:'#1a6cbe',docBg:'#d6d6d6',docLabel:'의료진 소개',docTitle:'#333',docs:[[IMG_DOC_M,'대표원장','일반/임플란트'],[IMG_DOC_F,'부원장','교정/심미']],docAvBd:'#1a6cbe',docNameC:'#333',docDescC:'#6B7280',caseImg:'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=400&q=80&fit=crop',facImgs:[IMG_FAC1,IMG_FAC2,IMG_FAC3],tourBg:'#f8fafc',tourCard:'#e8f2fc',tourTxt:'#1a6cbe',timeBg:'#fff',timeTitleC:'#333',timeTxt:'#585a5c',mapBg:'#f8fafc',mapCard:'#e8f2fc',mapTxt:'#1a6cbe',mapBtnBg:'#1a6cbe',mapBtnC:'#fff',footBg:'#e8f2fc',footTxt:'#1a6cbe',footSub:'#6B7280'}
     },
     {
       name:'병원전문',
       desc:'다크 컬러와 골드 포인트로 고급스러움을 극대화한 프리미엄 디자인입니다. 임플란트·심미보철 전문 치과에 적합하며, 대담한 타이포그래피와 세련된 레이아웃의 전문 병원 템플릿입니다.',
       features:['반응형 디자인 (PC/모바일)','다크 히어로 이미지 + 치과소개','의료진 3인 프로필 사진','진료과목 골드 보더 카드','치료사례 Before/After 이미지','병원시설 다크 사진 갤러리','환자후기 (별점+치료내용)','공지사항 게시판','예약안내 (전화/카카오/온라인)','오시는 길 (지도/주차/지하철/버스)'],
       colors:['#0f172a','#1e293b','#d4a574','#ffffff','#94a3b8'],
-      data:{nav:'#0f172a',navTxt:'#d4a574',heroImg:'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=80&fit=crop',heroOverlay:'rgba(15,23,42,.7)',heroTag:'PREMIUM DENTAL',heroTxt:'#fff',heroSub:'#94a3b8',heroTitle:'완벽한 미소를<br>디자인합니다',heroDesc:'최고의 기술력과 프리미엄 장비로<br>차원이 다른 진료를 경험하세요',accent:'#d4a574',intro:'최상의 결과를 위해<br>타협하지 않습니다',secBg:'#1e293b',secTxt:'#fff',deptTitle:'진료과목',depts:[['💎','심미보철'],['🔩','임플란트'],['😁','치아교정'],['🦷','일반진료'],['✨','미백치료'],['🛡️','치주치료']],cardBg:'rgba(255,255,255,.05)',cardBd:'rgba(212,165,116,.25)',cardTxt:'#d4a574',docBg:'#0f172a',docLabel:'MEDICAL TEAM',docTitle:'#d4a574',docs:[[IMG_DOC_M,'대표원장','임플란트 전문'],[IMG_DOC_F,'부원장','심미보철 전문'],[IMG_DOC_M2,'원장','교정 전문']],docAvBd:'#d4a574',docNameC:'#fff',docDescC:'#94a3b8',caseImg:'https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?w=400&q=80&fit=crop',facImgs:[IMG_FAC1,IMG_FAC2,IMG_FAC3],tourBg:'#1e293b',tourCard:'rgba(255,255,255,.05)',tourTxt:'#94a3b8',timeBg:'#0f172a',timeTitleC:'#d4a574',timeTxt:'#94a3b8',mapBg:'#1e293b',mapCard:'rgba(255,255,255,.05)',mapTxt:'#94a3b8',mapBtnBg:'#d4a574',mapBtnC:'#0f172a',footBg:'#0f172a',footTxt:'#d4a574',footSub:'#64748b'}
+      data:{nav:'#0f172a',navTxt:'#d4a574',heroImg:'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=80&fit=crop',heroOverlay:'rgba(15,23,42,.7)',heroTag:'PREMIUM DENTAL',heroTxt:'#fff',heroSub:'#94a3b8',heroTitle:'완벽한 미소를<br>디자인합니다',heroDesc:'최고의 기술력과 프리미엄 장비로<br>차원이 다른 진료를 경험하세요',accent:'#d4a574',intro:'최상의 결과를 위해<br>타협하지 않습니다',secBg:'#1e293b',secTxt:'#fff',deptTitle:'진료과목',depts:[['','심미보철'],['','임플란트'],['','치아교정'],['','일반진료'],['','미백치료'],['','치주치료']],cardBg:'rgba(255,255,255,.05)',cardBd:'rgba(212,165,116,.25)',cardTxt:'#d4a574',docBg:'#0f172a',docLabel:'MEDICAL TEAM',docTitle:'#d4a574',docs:[[IMG_DOC_M,'대표원장','임플란트 전문'],[IMG_DOC_F,'부원장','심미보철 전문'],[IMG_DOC_M2,'원장','교정 전문']],docAvBd:'#d4a574',docNameC:'#fff',docDescC:'#94a3b8',caseImg:'https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?w=400&q=80&fit=crop',facImgs:[IMG_FAC1,IMG_FAC2,IMG_FAC3],tourBg:'#1e293b',tourCard:'rgba(255,255,255,.05)',tourTxt:'#94a3b8',timeBg:'#0f172a',timeTitleC:'#d4a574',timeTxt:'#94a3b8',mapBg:'#1e293b',mapCard:'rgba(255,255,255,.05)',mapTxt:'#94a3b8',mapBtnBg:'#d4a574',mapBtnC:'#0f172a',footBg:'#0f172a',footTxt:'#d4a574',footSub:'#64748b'}
     },
     {
       name:'럭셔리',
       desc:'골드 포인트와 세련된 레이아웃의 럭셔리 디자인입니다. VIP 고객을 위한 최고급 치과 홈페이지로, 부드러운 그라데이션과 고급스러운 색상 조합이 특징입니다.',
       features:['반응형 디자인 (PC/모바일)','럭셔리 히어로 이미지 + 치과소개','의료진 원형 프로필 사진','진료과목 골드 그리드','치료사례 Before/After 이미지','병원시설 사진 갤러리','환자후기 (별점+치료내용)','공지사항 게시판','예약안내 (전화/카카오/온라인)','오시는 길 (지도/주차/지하철/버스)'],
       colors:['#1a1a2e','#16213e','#c9a96e','#ffffff','#e8d5b7'],
-      data:{nav:'#1a1a2e',navTxt:'#c9a96e',heroImg:'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&q=80&fit=crop',heroOverlay:'rgba(26,26,46,.65)',heroTag:'LUXURY DENTAL',heroTxt:'#fff',heroSub:'#e8d5b7',heroTitle:'특별한 미소를<br>선물합니다',heroDesc:'최고급 시설과 세심한 케어로<br>프리미엄 진료를 경험하세요',accent:'#c9a96e',intro:'품격 있는 진료,<br>차별화된 결과를 약속합니다',secBg:'#16213e',secTxt:'#fff',deptTitle:'진료과목',depts:[['💎','심미보철'],['🔩','임플란트'],['😁','치아교정'],['🦷','라미네이트'],['✨','미백치료'],['👑','올세라믹']],cardBg:'rgba(201,169,110,.08)',cardBd:'rgba(201,169,110,.25)',cardTxt:'#c9a96e',docBg:'#1a1a2e',docLabel:'EXPERT TEAM',docTitle:'#c9a96e',docs:[[IMG_DOC_M,'대표원장','심미보철 전문'],[IMG_DOC_F,'부원장','교정/미백 전문']],docAvBd:'#c9a96e',docNameC:'#fff',docDescC:'#e8d5b7',caseImg:'https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?w=400&q=80&fit=crop',facImgs:[IMG_FAC1,IMG_FAC2,IMG_FAC3],tourBg:'#16213e',tourCard:'rgba(201,169,110,.08)',tourTxt:'#e8d5b7',timeBg:'#1a1a2e',timeTitleC:'#c9a96e',timeTxt:'#e8d5b7',mapBg:'#16213e',mapCard:'rgba(201,169,110,.08)',mapTxt:'#e8d5b7',mapBtnBg:'#c9a96e',mapBtnC:'#1a1a2e',footBg:'#1a1a2e',footTxt:'#c9a96e',footSub:'#8b7355'}
+      data:{nav:'#1a1a2e',navTxt:'#c9a96e',heroImg:'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&q=80&fit=crop',heroOverlay:'rgba(26,26,46,.65)',heroTag:'LUXURY DENTAL',heroTxt:'#fff',heroSub:'#e8d5b7',heroTitle:'특별한 미소를<br>선물합니다',heroDesc:'최고급 시설과 세심한 케어로<br>프리미엄 진료를 경험하세요',accent:'#c9a96e',intro:'품격 있는 진료,<br>차별화된 결과를 약속합니다',secBg:'#16213e',secTxt:'#fff',deptTitle:'진료과목',depts:[['','심미보철'],['','임플란트'],['','치아교정'],['','라미네이트'],['','미백치료'],['','올세라믹']],cardBg:'rgba(201,169,110,.08)',cardBd:'rgba(201,169,110,.25)',cardTxt:'#c9a96e',docBg:'#1a1a2e',docLabel:'EXPERT TEAM',docTitle:'#c9a96e',docs:[[IMG_DOC_M,'대표원장','심미보철 전문'],[IMG_DOC_F,'부원장','교정/미백 전문']],docAvBd:'#c9a96e',docNameC:'#fff',docDescC:'#e8d5b7',caseImg:'https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?w=400&q=80&fit=crop',facImgs:[IMG_FAC1,IMG_FAC2,IMG_FAC3],tourBg:'#16213e',tourCard:'rgba(201,169,110,.08)',tourTxt:'#e8d5b7',timeBg:'#1a1a2e',timeTitleC:'#c9a96e',timeTxt:'#e8d5b7',mapBg:'#16213e',mapCard:'rgba(201,169,110,.08)',mapTxt:'#e8d5b7',mapBtnBg:'#c9a96e',mapBtnC:'#1a1a2e',footBg:'#1a1a2e',footTxt:'#c9a96e',footSub:'#8b7355'}
     }
   ];
 

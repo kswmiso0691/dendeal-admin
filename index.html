@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Den.deal 관리</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Noto Sans KR','Inter',sans-serif;background:#F0F1F5;color:#2D3436}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+/* ===== LOGIN ===== */
+#loginScreen{
+  position:fixed;inset:0;z-index:9999;
+  background:#F0F1F5;
+  display:flex;align-items:center;justify-content:center;
+}
+#loginScreen.hide{display:none}
+.login-card{width:100%;max-width:360px;padding:40px 24px;text-align:center}
+.login-logo{font-size:28px;font-weight:700;margin-bottom:4px}
+.login-logo .d{color:#2D3436}.login-logo .dot{color:#2563EB}
+.login-sub{font-size:13px;color:#9CA3AF;margin-bottom:32px}
+.login-input{
+  display:block;width:100%;padding:14px 16px;margin-bottom:12px;
+  border:1px solid #E5E7EB;border-radius:10px;font-size:14px;
+  outline:none;transition:border .2s;
+}
+.login-input:focus{border-color:#0B6954}
+.login-btn{
+  display:block;width:100%;padding:14px;margin-top:4px;
+  background:#0B6954;color:#fff;border-radius:10px;
+  font-size:15px;font-weight:600;transition:background .2s;
+}
+.login-btn:hover{background:#095443}
+.login-err{color:#ef4444;font-size:12px;margin-top:8px;min-height:18px}
+
+/* ===== APP SHELL ===== */
+#appShell{
+  display:none;
+  position:fixed;inset:0;z-index:1000;
+  justify-content:center;background:#F0F1F5;
+}
+#appShell.show{display:flex}
+
+.app-frame{
+  width:100%;max-width:480px;height:100%;
+  display:flex;flex-direction:column;
+  background:#fff;position:relative;
+  box-shadow:0 0 40px rgba(0,0,0,.08);
+}
+
+/* Top Admin Bar */
+.topbar{
+  height:44px;background:#0B6954;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 14px;flex-shrink:0;
+}
+.topbar-logo{font-size:16px;font-weight:700;color:#fff}
+.topbar-logo .dot{color:#7CDFB8}
+.topbar-right{display:flex;gap:8px;align-items:center}
+.topbar-btn{
+  font-size:11px;color:rgba(255,255,255,.8);padding:4px 10px;
+  border:1px solid rgba(255,255,255,.3);border-radius:14px;transition:all .2s;
+}
+.topbar-btn:hover{color:#fff;border-color:rgba(255,255,255,.6)}
+
+/* Iframe Area */
+.iframe-wrap{flex:1;position:relative;overflow:hidden}
+.iframe-wrap iframe{width:100%;height:100%;border:none;display:block}
+
+/* FAB */
+.fab{
+  position:absolute;right:14px;bottom:70px;z-index:100;
+  width:52px;height:52px;border-radius:50%;
+  background:#0B6954;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;
+  box-shadow:0 4px 16px rgba(11,105,84,.4);
+  transition:all .2s;
+}
+.fab:hover{transform:scale(1.08)}
+.fab:active{transform:scale(.95)}
+.fab.open{background:#2D3436;transform:rotate(45deg)}
+
+/* Overlay */
+.overlay{
+  position:absolute;inset:0;z-index:90;
+  background:rgba(0,0,0,.4);
+  opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.overlay.show{opacity:1;pointer-events:auto}
+
+/* Slide Panel */
+.slide-panel{
+  position:absolute;left:0;right:0;bottom:0;z-index:95;
+  background:#fff;border-radius:20px 20px 0 0;
+  max-height:85%;overflow-y:auto;
+  transform:translateY(100%);
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 -4px 30px rgba(0,0,0,.12);
+}
+.slide-panel.show{transform:translateY(0)}
+.slide-handle{width:36px;height:4px;background:#D1D5DB;border-radius:2px;margin:10px auto 6px}
+
+/* Panel Content */
+.sp-head{padding:12px 20px 0;display:flex;align-items:center;justify-content:space-between}
+.sp-title{font-size:17px;font-weight:700}
+.sp-close{font-size:22px;color:#9CA3AF;padding:4px 8px}
+
+.sp-body{padding:12px 20px 24px}
+
+/* 관리 카드 */
+.mgmt-profile{background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:14px}
+.mgmt-greeting{font-size:15px;font-weight:600;margin-bottom:6px}
+.mgmt-domain{display:flex;align-items:center;gap:8px;font-size:12px;color:#2563EB}
+.mgmt-domain button{font-size:11px;color:#6B7280;padding:3px 10px;border:1px solid #E5E7EB;border-radius:12px;background:#fff}
+
+.mgmt-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.mgmt-card{
+  background:#f9fafb;border-radius:12px;padding:16px 10px;
+  text-align:center;cursor:pointer;transition:all .15s;border:1px solid #f3f4f6;
+}
+.mgmt-card:active{transform:scale(.97)}
+.mgmt-card-icon{font-size:28px;margin-bottom:6px}
+.mgmt-card-label{font-size:12px;font-weight:500;color:#374151}
+
+.mgmt-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat-box{background:#ECFDF5;border-radius:10px;padding:14px 8px;text-align:center}
+.stat-val{font-size:22px;font-weight:700;color:#0B6954}
+.stat-lbl{font-size:11px;color:#6B7280;margin-top:2px}
+
+/* Nav inside panel */
+.sp-nav{display:flex;border-bottom:1px solid #E5E7EB;margin-bottom:14px;gap:0}
+.sp-nav button{
+  flex:1;padding:10px 0;font-size:13px;font-weight:500;color:#9CA3AF;
+  border-bottom:2px solid transparent;transition:all .2s;
+}
+.sp-nav button.on{color:#0B6954;border-bottom-color:#0B6954;font-weight:600}
+
+.sp-section{display:none}
+.sp-section.active{display:block}
+
+/* 문의 */
+.inq-empty{text-align:center;padding:30px 0;color:#9CA3AF;font-size:14px}
+.inq-item{background:#f9fafb;border-radius:10px;padding:14px;margin-bottom:10px;cursor:pointer;transition:background .15s}
+.inq-item:hover{background:#f3f4f6}
+.inq-item-top{display:flex;justify-content:space-between;margin-bottom:4px}
+.inq-item-name{font-size:14px;font-weight:600}
+.inq-item-date{font-size:11px;color:#9CA3AF}
+.inq-item-msg{font-size:13px;color:#6B7280;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inq-item-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid #E5E7EB;font-size:13px;color:#374151;line-height:1.6}
+.inq-item.open .inq-item-msg{white-space:normal}
+.inq-item.open .inq-item-detail{display:block}
+
+/* 설정 */
+.sett-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px;background:#f9fafb;border-radius:10px;margin-bottom:8px;
+  cursor:pointer;transition:background .15s;
+}
+.sett-item:hover{background:#f3f4f6}
+.sett-item-icon{font-size:20px;flex-shrink:0}
+.sett-item-text{flex:1}
+.sett-item-text .label{font-size:14px;font-weight:500}
+.sett-item-text .desc{font-size:12px;color:#9CA3AF}
+.sett-item-arrow{color:#D1D5DB;font-size:18px}
+.sett-item.danger .label{color:#ef4444}
+.sett-ver{text-align:center;padding:16px 0;font-size:12px;color:#D1D5DB}
+
+/* ===== PC 배경 ===== */
+.pc-bg-left,.pc-bg-right{
+  position:fixed;top:50%;transform:translateY(-50%);
+  z-index:999;pointer-events:none;
+}
+.pc-bg-left{left:calc((50% - 240px)/2);transform:translate(-50%,-50%);text-align:center}
+.pc-bg-right{left:calc(50% + 240px + (50% - 240px)/2);transform:translate(-50%,-50%);pointer-events:auto}
+.pc-bg-left .brand{font-size:36px;font-weight:800;color:#2D3436}
+.pc-bg-left .brand .dot{color:#2563EB}
+.pc-bg-left .sub{font-size:11px;color:#9CA3AF;margin-top:6px}
+.pc-bg-right a{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 24px;border-radius:12px;font-size:13px;font-weight:600;
+  width:180px;margin-bottom:10px;text-decoration:none;transition:transform .15s;
+}
+.pc-bg-right a:hover{transform:translateY(-2px)}
+.pc-bg-right .kakao{background:#FEE500;color:#3C1E1E}
+.pc-bg-right .phone{background:#0B6954;color:#fff}
+@media(max-width:1080px){.pc-bg-left,.pc-bg-right{display:none}}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:#1F2937;color:#fff;padding:10px 20px;border-radius:20px;
+  font-size:13px;opacity:0;transition:all .3s;z-index:99999;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo"><span class="d">Den</span><span class="dot">.</span><span class="d">deal</span></div>
+    <p class="login-sub">관리자 로그인</p>
+    <form id="loginForm">
+      <input class="login-input" type="text" id="inpId" placeholder="아이디" autocomplete="username">
+      <input class="login-input" type="password" id="inpPw" placeholder="비밀번호" autocomplete="current-password">
+      <button class="login-btn" type="submit">로그인</button>
+      <div class="login-err" id="loginErr"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="appShell">
+  <!-- PC 배경 -->
+  <div class="pc-bg-left">
+    <div class="brand">Den<span class="dot">.</span>deal</div>
+    <div class="sub">치과 디지털 플랫폼</div>
+  </div>
+  <div class="pc-bg-right">
+    <a href="https://pf.kakao.com/_xdjNsG" target="_blank" class="kakao">💬 카카오톡 문의</a>
+    <a href="tel:031-360-0415" class="phone">📞 전화 문의</a>
+  </div>
+
+  <div class="app-frame">
+    <!-- Top Admin Bar -->
+    <div class="topbar">
+      <div class="topbar-logo">Den<span class="dot">.</span>deal <span style="font-weight:400;font-size:12px;opacity:.7">Admin</span></div>
+      <div class="topbar-right">
+        <button class="topbar-btn" id="btnLogout">로그아웃</button>
+      </div>
+    </div>
+
+    <!-- dendeal.kr iframe (메인 영역) -->
+    <div class="iframe-wrap">
+      <iframe src="about:blank" id="dendealIframe"></iframe>
+
+      <!-- 오버레이 -->
+      <div class="overlay" id="overlay"></div>
+
+      <!-- 슬라이드 패널 -->
+      <div class="slide-panel" id="slidePanel">
+        <div class="slide-handle"></div>
+        <div class="sp-head">
+          <div class="sp-title">관리 패널</div>
+          <button class="sp-close" id="spClose">✕</button>
+        </div>
+        <!-- 패널 내 탭 -->
+        <div class="sp-nav">
+          <button class="on" data-sp="0">관리</button>
+          <button data-sp="1">회원문의</button>
+          <button data-sp="2">설정</button>
+        </div>
+        <div class="sp-body">
+          <!-- 관리 섹션 -->
+          <div class="sp-section active" id="secMgmt">
+            <div class="mgmt-profile">
+              <div class="mgmt-greeting">안녕하세요, <strong>관리자</strong>님</div>
+              <div class="mgmt-domain">
+                <span id="domainTxt"></span>
+                <button id="btnCopy">복사</button>
+              </div>
+            </div>
+            <div class="mgmt-cards">
+              <div class="mgmt-card" id="cardEdit">
+                <div class="mgmt-card-icon">🌐</div>
+                <div class="mgmt-card-label">홈페이지 편집</div>
+              </div>
+              <div class="mgmt-card" id="cardInq">
+                <div class="mgmt-card-icon">💬</div>
+                <div class="mgmt-card-label">회원문의관리</div>
+              </div>
+              <div class="mgmt-card" id="cardPreview">
+                <div class="mgmt-card-icon">👁️</div>
+                <div class="mgmt-card-label">미리보기</div>
+              </div>
+            </div>
+            <div class="mgmt-stats">
+              <div class="stat-box"><div class="stat-val" id="sInq">0</div><div class="stat-lbl">문의 접수</div></div>
+              <div class="stat-box"><div class="stat-val" id="sPopup">0</div><div class="stat-lbl">활성 팝업</div></div>
+              <div class="stat-box"><div class="stat-val" id="sImg">0</div><div class="stat-lbl">등록 이미지</div></div>
+            </div>
+          </div>
+
+          <!-- 회원문의 섹션 -->
+          <div class="sp-section" id="secInq">
+            <div id="inqList"></div>
+          </div>
+
+          <!-- 설정 섹션 -->
+          <div class="sp-section" id="secSett">
+            <div class="sett-item" id="settEdit">
+              <div class="sett-item-icon">🌐</div>
+              <div class="sett-item-text"><div class="label">홈페이지 편집모드</div><div class="desc">홈페이지를 확인하고 편집합니다</div></div>
+              <div class="sett-item-arrow">›</div>
+            </div>
+            <div class="sett-item" id="settPreview">
+              <div class="sett-item-icon">👁️</div>
+              <div class="sett-item-text"><div class="label">미리보기</div><div class="desc">홈페이지를 새 탭에서 확인합니다</div></div>
+              <div class="sett-item-arrow">›</div>
+            </div>
+            <div class="sett-item danger" id="settLogout">
+              <div class="sett-item-icon">🚪</div>
+              <div class="sett-item-text"><div class="label">로그아웃</div><div class="desc">관리자 계정에서 로그아웃합니다</div></div>
+              <div class="sett-item-arrow">›</div>
+            </div>
+            <div class="sett-ver">Den.deal Admin v1.0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAB 버튼 -->
+      <button class="fab" id="fab">🛠</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var ID='admin', PW='admin123';
+
+  var loginScreen=document.getElementById('loginScreen');
+  var appShell=document.getElementById('appShell');
+  var loginForm=document.getElementById('loginForm');
+  var loginErr=document.getElementById('loginErr');
+  var toastEl=document.getElementById('toast');
+  var dendealIframe=document.getElementById('dendealIframe');
+  var fab=document.getElementById('fab');
+  var overlay=document.getElementById('overlay');
+  var slidePanel=document.getElementById('slidePanel');
+  var spClose=document.getElementById('spClose');
+  var spNavBtns=document.querySelectorAll('.sp-nav button');
+  var spSections=[
+    document.getElementById('secMgmt'),
+    document.getElementById('secInq'),
+    document.getElementById('secSett')
+  ];
+
+  function toast(msg){
+    toastEl.textContent=msg;
+    toastEl.classList.add('show');
+    setTimeout(function(){toastEl.classList.remove('show')},2000);
+  }
+
+  // 패널 열기/닫기
+  function openPanel(){
+    overlay.classList.add('show');
+    slidePanel.classList.add('show');
+    fab.classList.add('open');
+    refreshStats();
+    refreshInq();
+  }
+  function closePanel(){
+    overlay.classList.remove('show');
+    slidePanel.classList.remove('show');
+    fab.classList.remove('open');
+  }
+
+  fab.addEventListener('click',function(){
+    if(slidePanel.classList.contains('show')) closePanel();
+    else openPanel();
+  });
+  overlay.addEventListener('click',closePanel);
+  spClose.addEventListener('click',closePanel);
+
+  // 패널 내 탭 전환
+  function switchSp(idx){
+    spNavBtns.forEach(function(b,i){b.classList.toggle('on',i===idx)});
+    spSections.forEach(function(s,i){s.classList.toggle('active',i===idx)});
+    if(idx===1) refreshInq();
+  }
+  spNavBtns.forEach(function(b){
+    b.addEventListener('click',function(){switchSp(+this.dataset.sp)});
+  });
+
+  // 로그인 처리
+  function doLogin(){
+    var id=document.getElementById('inpId').value.trim();
+    var pw=document.getElementById('inpPw').value;
+    if(id===ID && pw===PW){
+      sessionStorage.setItem('dd_admin','1');
+      loginScreen.style.display='none';
+      appShell.style.display='flex';
+      dendealIframe.src='https://dendeal.kr';
+      toast('로그인되었습니다');
+    } else {
+      loginErr.textContent='아이디 또는 비밀번호가 올바르지 않습니다.';
+      document.getElementById('inpPw').value='';
+      document.getElementById('inpPw').focus();
+    }
+  }
+
+  // form submit + 버튼 클릭 둘 다 처리
+  loginForm.addEventListener('submit',function(e){e.preventDefault();doLogin()});
+  document.querySelector('.login-btn').addEventListener('click',function(e){e.preventDefault();doLogin()});
+
+  // 로그아웃
+  function doLogout(){
+    if(confirm('로그아웃 하시겠습니까?')){
+      sessionStorage.removeItem('dd_admin');
+      location.reload();
+    }
+  }
+  document.getElementById('btnLogout').addEventListener('click',doLogout);
+  document.getElementById('settLogout').addEventListener('click',doLogout);
+
+  // 도메인 복사
+  document.getElementById('domainTxt').textContent='dendeal.kr';
+  document.getElementById('btnCopy').addEventListener('click',function(){
+    var url='https://dendeal.kr';
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(url).then(function(){toast('링크가 복사되었습니다')});
+    }else{
+      var ta=document.createElement('textarea');ta.value=url;
+      document.body.appendChild(ta);ta.select();document.execCommand('copy');
+      document.body.removeChild(ta);toast('링크가 복사되었습니다');
+    }
+  });
+
+  // 바로가기
+  document.getElementById('cardInq').addEventListener('click',function(){switchSp(1)});
+  document.getElementById('cardPreview').addEventListener('click',function(){window.open('https://dendeal.kr','_blank')});
+  document.getElementById('cardEdit').addEventListener('click',function(){window.open('https://dendeal.kr','_blank')});
+  document.getElementById('settEdit').addEventListener('click',function(){window.open('https://dendeal.kr','_blank')});
+  document.getElementById('settPreview').addEventListener('click',function(){window.open('https://dendeal.kr','_blank')});
+
+  // 통계
+  function refreshStats(){
+    var inqs=JSON.parse(localStorage.getItem('inquiries')||'[]');
+    var pops=JSON.parse(localStorage.getItem('adminPopups')||'[]').filter(function(p){return p.active});
+    var imgs=JSON.parse(localStorage.getItem('adminImages')||'{}');
+    document.getElementById('sInq').textContent=inqs.length;
+    document.getElementById('sPopup').textContent=pops.length;
+    document.getElementById('sImg').textContent=Object.keys(imgs).length;
+  }
+
+  // 문의목록
+  function refreshInq(){
+    var inqs=JSON.parse(localStorage.getItem('inquiries')||'[]');
+    var el=document.getElementById('inqList');
+    if(!inqs.length){el.innerHTML='<div class="inq-empty">접수된 문의가 없습니다</div>';return}
+    var html='';
+    inqs.forEach(function(q){
+      html+='<div class="inq-item" onclick="this.classList.toggle(\'open\')">'
+        +'<div class="inq-item-top"><span class="inq-item-name">'+(q.name||'익명')+'</span><span class="inq-item-date">'+(q.date||'')+'</span></div>'
+        +'<div class="inq-item-msg">'+(q.message||q.msg||'')+'</div>'
+        +'<div class="inq-item-detail">'
+        +(q.phone?'📞 '+q.phone+'<br>':'')
+        +(q.email?'✉️ '+q.email+'<br>':'')
+        +'<br>'+(q.message||q.msg||'')
+        +'</div></div>';
+    });
+    el.innerHTML=html;
+  }
+
+  // 초기화 (이미 로그인된 경우)
+  if(sessionStorage.getItem('dd_admin')==='1'){
+    loginScreen.style.display='none';
+    appShell.style.display='flex';
+    dendealIframe.src='https://dendeal.kr';
+  }
+})();
+</script>
+</body>
+</html>

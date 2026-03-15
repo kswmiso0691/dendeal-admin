@@ -58,6 +58,8 @@ input,textarea,select{font-family:inherit}
 }
 .topbar-logo{font-size:18px;font-weight:700}
 .topbar-logo .dot{color:#2563EB}
+.topbar-role{font-size:11px;color:#fff;background:#0B6954;padding:2px 8px;border-radius:8px;margin-left:6px;font-weight:500}
+.topbar-role.member{background:#2563EB}
 .topbar-btn{
   font-size:12px;color:#9CA3AF;padding:5px 12px;
   border:1px solid #E5E7EB;border-radius:16px;
@@ -85,12 +87,13 @@ input,textarea,select{font-family:inherit}
 .tab.on .tab-icon{opacity:1}
 .tab.on .tab-text{color:#0B6954;font-weight:600}
 
-/* ===== 홈화면 ===== */
+/* ===== 홈화면 (관리자) ===== */
 .home{padding:20px 16px}
 .home-welcome{
   background:linear-gradient(135deg,#0B6954,#0d7d64);
   border-radius:16px;padding:24px 20px;color:#fff;margin-bottom:20px;
 }
+.home-welcome.member-bg{background:linear-gradient(135deg,#2563EB,#3b82f6)}
 .home-welcome h2{font-size:18px;font-weight:700;margin-bottom:4px}
 .home-welcome p{font-size:13px;opacity:.8}
 .home-domain{
@@ -103,6 +106,7 @@ input,textarea,select{font-family:inherit}
   border:1px solid rgba(255,255,255,.4);border-radius:10px;background:none;
 }
 .home-shortcuts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.home-shortcuts.col2{grid-template-columns:repeat(2,1fr)}
 .shortcut{
   background:#f9fafb;border-radius:14px;padding:20px 10px;
   text-align:center;border:1px solid #f3f4f6;transition:all .15s;
@@ -137,7 +141,7 @@ input,textarea,select{font-family:inherit}
 }
 .edit-save:hover{background:#095443}
 
-/* ===== 회원문의관리 ===== */
+/* ===== 회원문의관리 (관리자) ===== */
 .inq{padding:20px 16px}
 .inq-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .inq-header h2{font-size:17px;font-weight:700}
@@ -163,11 +167,31 @@ input,textarea,select{font-family:inherit}
 }
 .inq-item.open .inq-item-msg{white-space:normal}
 .inq-item.open .inq-item-detail{display:block}
-.inq-item-status{
-  font-size:10px;padding:2px 8px;border-radius:8px;font-weight:600;
-}
+.inq-item-status{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:600}
 .status-new{background:#FEF3C7;color:#92400E}
 .status-done{background:#D1FAE5;color:#065F46}
+
+/* ===== 회원 문의하기 폼 ===== */
+.inq-form{padding:20px 16px}
+.inq-form h2{font-size:17px;font-weight:700;margin-bottom:16px}
+.inq-form-section{
+  background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid #f3f4f6;
+}
+.inq-form-field{margin-bottom:12px}
+.inq-form-field label{display:block;font-size:12px;color:#6B7280;margin-bottom:4px;font-weight:500}
+.inq-form-field input,.inq-form-field textarea{
+  width:100%;padding:10px 12px;border:1px solid #E5E7EB;border-radius:8px;
+  font-size:13px;outline:none;resize:vertical;
+}
+.inq-form-field input:focus,.inq-form-field textarea:focus{border-color:#2563EB}
+.inq-submit{
+  display:block;width:100%;padding:13px;margin-top:8px;
+  background:#2563EB;color:#fff;border-radius:10px;
+  font-size:14px;font-weight:600;
+}
+.inq-submit:hover{background:#1d4ed8}
+.my-inq-list{margin-top:20px}
+.my-inq-list h3{font-size:15px;font-weight:600;margin-bottom:10px}
 
 /* ===== 미리보기 ===== */
 .preview{padding:20px 16px}
@@ -186,19 +210,40 @@ input,textarea,select{font-family:inherit}
   flex:1;margin-left:8px;background:#1a1a2e;border-radius:4px;
   padding:4px 10px;font-size:11px;color:#9CA3AF;
 }
-.preview-body{
-  height:320px;display:flex;align-items:center;justify-content:center;
-  background:#fff;
-}
+.preview-body{height:320px;display:flex;align-items:center;justify-content:center;background:#fff}
 .preview-body iframe{width:100%;height:100%;border:none}
 .preview-actions{display:flex;gap:10px;margin-top:4px}
 .preview-btn{
-  flex:1;padding:13px;border-radius:10px;font-size:13px;font-weight:600;
-  text-align:center;
+  flex:1;padding:13px;border-radius:10px;font-size:13px;font-weight:600;text-align:center;
 }
 .preview-btn.primary{background:#0B6954;color:#fff}
 .preview-btn.secondary{background:#f3f4f6;color:#374151}
 .preview-btn:hover{opacity:.9}
+
+/* ===== 마이페이지 ===== */
+.mypage{padding:20px 16px}
+.mypage-profile{
+  background:#f9fafb;border-radius:14px;padding:24px;text-align:center;
+  margin-bottom:16px;border:1px solid #f3f4f6;
+}
+.mypage-avatar{
+  width:64px;height:64px;border-radius:50%;
+  background:#2563EB;color:#fff;font-size:24px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 12px;
+}
+.mypage-name{font-size:16px;font-weight:700;margin-bottom:2px}
+.mypage-id{font-size:13px;color:#9CA3AF}
+.mypage-menu{margin-top:8px}
+.mypage-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px;background:#f9fafb;border-radius:10px;margin-bottom:8px;
+  cursor:pointer;transition:background .15s;border:1px solid #f3f4f6;
+}
+.mypage-item:hover{background:#f3f4f6}
+.mypage-item-icon{font-size:20px}
+.mypage-item-text{flex:1;font-size:14px;font-weight:500}
+.mypage-item-arrow{color:#D1D5DB;font-size:18px}
+.mypage-item.danger .mypage-item-text{color:#ef4444}
 
 /* ===== PC 배경 ===== */
 .pc-bg{
@@ -225,7 +270,7 @@ input,textarea,select{font-family:inherit}
 <div id="loginScreen">
   <div class="login-card">
     <div class="login-logo"><span class="d">Den</span><span class="dot">.</span><span class="d">deal</span></div>
-    <p class="login-sub">관리자 로그인</p>
+    <p class="login-sub">로그인</p>
     <div>
       <input class="login-input" type="text" id="inpId" placeholder="아이디">
       <input class="login-input" type="password" id="inpPw" placeholder="비밀번호">
@@ -244,13 +289,15 @@ input,textarea,select{font-family:inherit}
 
   <div class="app-frame">
     <div class="topbar">
-      <div class="topbar-logo">Den<span class="dot">.</span>deal</div>
+      <div class="topbar-logo">Den<span class="dot">.</span>deal<span class="topbar-role" id="roleTag">관리자</span></div>
       <button class="topbar-btn" onclick="window._logout()">로그아웃</button>
     </div>
 
     <div class="content">
-      <!-- 홈화면 -->
-      <div class="panel active" id="panelHome">
+
+      <!-- ============ 관리자 패널들 ============ -->
+      <!-- 관리자 홈 -->
+      <div class="panel" id="panelAdminHome">
         <div class="home">
           <div class="home-welcome">
             <h2>안녕하세요, 관리자님</h2>
@@ -282,53 +329,32 @@ input,textarea,select{font-family:inherit}
         </div>
       </div>
 
-      <!-- 홈페이지 편집 -->
-      <div class="panel" id="panelEdit">
+      <!-- 관리자 편집 -->
+      <div class="panel" id="panelAdminEdit">
         <div class="edit">
           <h2>✏️ 홈페이지 편집</h2>
           <div class="edit-section">
             <div class="edit-section-title">📌 기본 정보</div>
-            <div class="edit-field">
-              <label>치과 이름</label>
-              <input type="text" id="editName" placeholder="치과 이름을 입력하세요">
-            </div>
-            <div class="edit-field">
-              <label>전화번호</label>
-              <input type="tel" id="editPhone" placeholder="031-000-0000">
-            </div>
-            <div class="edit-field">
-              <label>주소</label>
-              <input type="text" id="editAddr" placeholder="주소를 입력하세요">
-            </div>
+            <div class="edit-field"><label>치과 이름</label><input type="text" id="editName" placeholder="치과 이름을 입력하세요"></div>
+            <div class="edit-field"><label>전화번호</label><input type="tel" id="editPhone" placeholder="031-000-0000"></div>
+            <div class="edit-field"><label>주소</label><input type="text" id="editAddr" placeholder="주소를 입력하세요"></div>
           </div>
           <div class="edit-section">
             <div class="edit-section-title">🕐 진료시간</div>
-            <div class="edit-field">
-              <label>평일</label>
-              <input type="text" id="editWeekday" placeholder="09:00 ~ 18:00">
-            </div>
-            <div class="edit-field">
-              <label>토요일</label>
-              <input type="text" id="editSat" placeholder="09:00 ~ 13:00">
-            </div>
-            <div class="edit-field">
-              <label>점심시간</label>
-              <input type="text" id="editLunch" placeholder="13:00 ~ 14:00">
-            </div>
+            <div class="edit-field"><label>평일</label><input type="text" id="editWeekday" placeholder="09:00 ~ 18:00"></div>
+            <div class="edit-field"><label>토요일</label><input type="text" id="editSat" placeholder="09:00 ~ 13:00"></div>
+            <div class="edit-field"><label>점심시간</label><input type="text" id="editLunch" placeholder="13:00 ~ 14:00"></div>
           </div>
           <div class="edit-section">
             <div class="edit-section-title">📝 소개글</div>
-            <div class="edit-field">
-              <label>홈페이지 소개</label>
-              <textarea id="editIntro" rows="4" placeholder="홈페이지에 표시될 소개글을 입력하세요"></textarea>
-            </div>
+            <div class="edit-field"><label>홈페이지 소개</label><textarea id="editIntro" rows="4" placeholder="홈페이지에 표시될 소개글을 입력하세요"></textarea></div>
           </div>
           <button class="edit-save" onclick="window._saveEdit()">저장하기</button>
         </div>
       </div>
 
-      <!-- 회원문의관리 -->
-      <div class="panel" id="panelInq">
+      <!-- 관리자 문의관리 -->
+      <div class="panel" id="panelAdminInq">
         <div class="inq">
           <div class="inq-header">
             <h2>💬 회원문의관리</h2>
@@ -338,20 +364,16 @@ input,textarea,select{font-family:inherit}
         </div>
       </div>
 
-      <!-- 미리보기 -->
-      <div class="panel" id="panelPreview">
+      <!-- 관리자 미리보기 -->
+      <div class="panel" id="panelAdminPreview">
         <div class="preview">
           <h2>👁️ 홈페이지 미리보기</h2>
           <div class="preview-card">
             <div class="preview-browser">
-              <div class="preview-dot r"></div>
-              <div class="preview-dot y"></div>
-              <div class="preview-dot g"></div>
+              <div class="preview-dot r"></div><div class="preview-dot y"></div><div class="preview-dot g"></div>
               <div class="preview-url">dendeal.kr</div>
             </div>
-            <div class="preview-body">
-              <iframe src="https://dendeal.kr" id="previewFrame"></iframe>
-            </div>
+            <div class="preview-body"><iframe src="https://dendeal.kr" id="previewFrame"></iframe></div>
           </div>
           <div class="preview-actions">
             <button class="preview-btn secondary" onclick="document.getElementById('previewFrame').src='https://dendeal.kr'">🔄 새로고침</button>
@@ -359,15 +381,96 @@ input,textarea,select{font-family:inherit}
           </div>
         </div>
       </div>
+
+      <!-- ============ 회원 패널들 ============ -->
+      <!-- 회원 홈 -->
+      <div class="panel" id="panelMemberHome">
+        <div class="home">
+          <div class="home-welcome member-bg">
+            <h2>안녕하세요, 회원님</h2>
+            <p>Den.deal에 오신 것을 환영합니다</p>
+          </div>
+          <div class="home-shortcuts col2">
+            <button class="shortcut" onclick="window._switchTab(1)">
+              <div class="shortcut-icon">💬</div>
+              <div class="shortcut-label">문의하기</div>
+            </button>
+            <button class="shortcut" onclick="window._switchTab(2)">
+              <div class="shortcut-icon">👁️</div>
+              <div class="shortcut-label">홈페이지 보기</div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 회원 문의하기 -->
+      <div class="panel" id="panelMemberInq">
+        <div class="inq-form">
+          <h2>💬 문의하기</h2>
+          <div class="inq-form-section">
+            <div class="inq-form-field"><label>이름</label><input type="text" id="mqName" placeholder="이름을 입력하세요"></div>
+            <div class="inq-form-field"><label>연락처</label><input type="tel" id="mqPhone" placeholder="010-0000-0000"></div>
+            <div class="inq-form-field"><label>이메일</label><input type="email" id="mqEmail" placeholder="email@example.com"></div>
+            <div class="inq-form-field"><label>문의 내용</label><textarea id="mqMsg" rows="5" placeholder="문의 내용을 입력하세요"></textarea></div>
+          </div>
+          <button class="inq-submit" onclick="window._submitInq()">문의 보내기</button>
+          <div class="my-inq-list">
+            <h3>📋 내 문의 내역</h3>
+            <div id="myInqList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 회원 미리보기 -->
+      <div class="panel" id="panelMemberPreview">
+        <div class="preview">
+          <h2>👁️ 홈페이지 보기</h2>
+          <div class="preview-card">
+            <div class="preview-browser">
+              <div class="preview-dot r"></div><div class="preview-dot y"></div><div class="preview-dot g"></div>
+              <div class="preview-url">dendeal.kr</div>
+            </div>
+            <div class="preview-body"><iframe src="https://dendeal.kr" id="memberPreviewFrame"></iframe></div>
+          </div>
+          <div class="preview-actions">
+            <button class="preview-btn secondary" onclick="document.getElementById('memberPreviewFrame').src='https://dendeal.kr'">🔄 새로고침</button>
+            <button class="preview-btn primary" onclick="window.open('https://dendeal.kr','_blank')">🔗 새 탭에서 열기</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 회원 마이페이지 -->
+      <div class="panel" id="panelMemberMypage">
+        <div class="mypage">
+          <div class="mypage-profile">
+            <div class="mypage-avatar">T</div>
+            <div class="mypage-name">회원</div>
+            <div class="mypage-id">test</div>
+          </div>
+          <div class="mypage-menu">
+            <div class="mypage-item" onclick="window._switchTab(1)">
+              <div class="mypage-item-icon">💬</div>
+              <div class="mypage-item-text">내 문의 내역</div>
+              <div class="mypage-item-arrow">›</div>
+            </div>
+            <div class="mypage-item" onclick="window._switchTab(2)">
+              <div class="mypage-item-icon">👁️</div>
+              <div class="mypage-item-text">홈페이지 보기</div>
+              <div class="mypage-item-arrow">›</div>
+            </div>
+            <div class="mypage-item danger" onclick="window._logout()">
+              <div class="mypage-item-icon">🚪</div>
+              <div class="mypage-item-text">로그아웃</div>
+              <div class="mypage-item-arrow">›</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Bottom Tabs -->
-    <div class="bottombar">
-      <button class="tab on" onclick="window._switchTab(0)"><span class="tab-icon">🏠</span><span class="tab-text">홈</span></button>
-      <button class="tab" onclick="window._switchTab(1)"><span class="tab-icon">✏️</span><span class="tab-text">편집</span></button>
-      <button class="tab" onclick="window._switchTab(2)"><span class="tab-icon">💬</span><span class="tab-text">문의</span></button>
-      <button class="tab" onclick="window._switchTab(3)"><span class="tab-icon">👁️</span><span class="tab-text">미리보기</span></button>
-    </div>
+    <!-- Bottom Tabs (동적 변경) -->
+    <div class="bottombar" id="bottombar"></div>
   </div>
 </div>
 
@@ -375,18 +478,37 @@ input,textarea,select{font-family:inherit}
 
 <script>
 (function(){
-  var ID='admin',PW='admin123';
+  var ACCOUNTS={
+    admin:{pw:'admin123',role:'admin',name:'관리자'},
+    test:{pw:'test123',role:'member',name:'회원'}
+  };
+
   var loginScreen=document.getElementById('loginScreen');
   var appShell=document.getElementById('appShell');
   var loginErr=document.getElementById('loginErr');
   var toastEl=document.getElementById('toast');
-  var panels=[
-    document.getElementById('panelHome'),
-    document.getElementById('panelEdit'),
-    document.getElementById('panelInq'),
-    document.getElementById('panelPreview')
+  var bottombar=document.getElementById('bottombar');
+  var roleTag=document.getElementById('roleTag');
+
+  var currentRole='';
+  var currentPanels=[];
+  var currentTabs=[];
+
+  var adminPanels=['panelAdminHome','panelAdminEdit','panelAdminInq','panelAdminPreview'];
+  var adminTabs=[
+    {icon:'🏠',text:'홈'},
+    {icon:'✏️',text:'편집'},
+    {icon:'💬',text:'문의'},
+    {icon:'👁️',text:'미리보기'}
   ];
-  var tabs=document.querySelectorAll('.tab');
+
+  var memberPanels=['panelMemberHome','panelMemberInq','panelMemberPreview','panelMemberMypage'];
+  var memberTabs=[
+    {icon:'🏠',text:'홈'},
+    {icon:'💬',text:'문의'},
+    {icon:'👁️',text:'보기'},
+    {icon:'👤',text:'마이'}
+  ];
 
   function toast(msg){
     toastEl.textContent=msg;
@@ -394,24 +516,61 @@ input,textarea,select{font-family:inherit}
     setTimeout(function(){toastEl.classList.remove('show')},2000);
   }
 
-  // 탭 전환
+  function buildTabs(tabList){
+    var html='';
+    tabList.forEach(function(t,i){
+      html+='<button class="tab'+(i===0?' on':'')+'" onclick="window._switchTab('+i+')">'
+        +'<span class="tab-icon">'+t.icon+'</span><span class="tab-text">'+t.text+'</span></button>';
+    });
+    bottombar.innerHTML=html;
+  }
+
   window._switchTab=function(idx){
-    panels.forEach(function(p,i){p.classList.toggle('active',i===idx)});
+    currentPanels.forEach(function(id,i){
+      document.getElementById(id).classList.toggle('active',i===idx);
+    });
+    var tabs=document.querySelectorAll('.tab');
     tabs.forEach(function(t,i){t.classList.toggle('on',i===idx)});
-    if(idx===0) refreshStats();
-    if(idx===2) refreshInq();
+    if(currentRole==='admin'){
+      if(idx===0) refreshStats();
+      if(idx===2) refreshInq();
+    }
+    if(currentRole==='member' && idx===1) refreshMyInq();
   };
+
+  function enterApp(role){
+    currentRole=role;
+    if(role==='admin'){
+      currentPanels=adminPanels;
+      buildTabs(adminTabs);
+      roleTag.textContent='관리자';
+      roleTag.className='topbar-role';
+      loadEdit();
+    }else{
+      currentPanels=memberPanels;
+      buildTabs(memberTabs);
+      roleTag.textContent='회원';
+      roleTag.className='topbar-role member';
+    }
+    // 모든 패널 숨기기
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
+    // 첫 패널 활성화
+    document.getElementById(currentPanels[0]).classList.add('active');
+    loginScreen.style.display='none';
+    appShell.style.display='flex';
+    if(role==='admin') refreshStats();
+  }
 
   // 로그인
   window._doLogin=function(){
     var id=document.getElementById('inpId').value.trim();
     var pw=document.getElementById('inpPw').value;
-    if(id===ID&&pw===PW){
-      sessionStorage.setItem('dd_admin','1');
-      loginScreen.style.display='none';
-      appShell.style.display='flex';
-      refreshStats();
-      toast('로그인되었습니다');
+    var acc=ACCOUNTS[id];
+    if(acc && acc.pw===pw){
+      sessionStorage.setItem('dd_user',id);
+      sessionStorage.setItem('dd_role',acc.role);
+      enterApp(acc.role);
+      toast(acc.name+'님 환영합니다');
     }else{
       loginErr.textContent='아이디 또는 비밀번호가 올바르지 않습니다.';
       document.getElementById('inpPw').value='';
@@ -424,7 +583,7 @@ input,textarea,select{font-family:inherit}
   // 로그아웃
   window._logout=function(){
     if(confirm('로그아웃 하시겠습니까?')){
-      sessionStorage.removeItem('dd_admin');
+      sessionStorage.clear();
       location.reload();
     }
   };
@@ -469,14 +628,12 @@ input,textarea,select{font-family:inherit}
   // 통계
   function refreshStats(){
     var inqs=JSON.parse(localStorage.getItem('inquiries')||'[]');
-    var pops=JSON.parse(localStorage.getItem('adminPopups')||'[]').filter(function(p){return p.active});
-    var imgs=JSON.parse(localStorage.getItem('adminImages')||'{}');
     document.getElementById('sInq').textContent=inqs.length;
-    document.getElementById('sPopup').textContent=pops.length;
-    document.getElementById('sImg').textContent=Object.keys(imgs).length;
+    document.getElementById('sPopup').textContent='0';
+    document.getElementById('sImg').textContent='0';
   }
 
-  // 문의목록
+  // 관리자 문의목록
   function refreshInq(){
     var inqs=JSON.parse(localStorage.getItem('inquiries')||'[]');
     var el=document.getElementById('inqList');
@@ -486,7 +643,7 @@ input,textarea,select{font-family:inherit}
       return;
     }
     var html='';
-    inqs.forEach(function(q){
+    inqs.forEach(function(q,i){
       var st=q.status==='done'?'done':'new';
       html+='<div class="inq-item" onclick="this.classList.toggle(\'open\')">'
         +'<div class="inq-item-top">'
@@ -494,22 +651,61 @@ input,textarea,select{font-family:inherit}
         +'<span class="inq-item-status status-'+st+'">'+(st==='done'?'답변완료':'새문의')+'</span>'
         +'</div>'
         +'<div style="font-size:11px;color:#9CA3AF;margin-bottom:4px">'+(q.date||'')+'</div>'
-        +'<div class="inq-item-msg">'+(q.message||q.msg||'')+'</div>'
+        +'<div class="inq-item-msg">'+(q.message||'')+'</div>'
         +'<div class="inq-item-detail">'
         +(q.phone?'📞 '+q.phone+'<br>':'')
         +(q.email?'✉️ '+q.email+'<br>':'')
-        +'<br>'+(q.message||q.msg||'')
+        +'<br>'+(q.message||'')
         +'</div></div>';
     });
     el.innerHTML=html;
   }
 
+  // 회원 문의 보내기
+  window._submitInq=function(){
+    var name=document.getElementById('mqName').value.trim();
+    var phone=document.getElementById('mqPhone').value.trim();
+    var email=document.getElementById('mqEmail').value.trim();
+    var msg=document.getElementById('mqMsg').value.trim();
+    if(!name||!msg){toast('이름과 문의 내용을 입력하세요');return}
+    var inqs=JSON.parse(localStorage.getItem('inquiries')||'[]');
+    var now=new Date();
+    var date=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0')+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    inqs.push({name:name,phone:phone,email:email,message:msg,date:date,status:'new',user:'test'});
+    localStorage.setItem('inquiries',JSON.stringify(inqs));
+    document.getElementById('mqName').value='';
+    document.getElementById('mqPhone').value='';
+    document.getElementById('mqEmail').value='';
+    document.getElementById('mqMsg').value='';
+    toast('문의가 접수되었습니다');
+    refreshMyInq();
+  };
+
+  // 회원 내 문의내역
+  function refreshMyInq(){
+    var inqs=JSON.parse(localStorage.getItem('inquiries')||'[]');
+    var my=inqs.filter(function(q){return q.user==='test'});
+    var el=document.getElementById('myInqList');
+    if(!my.length){el.innerHTML='<div class="inq-empty" style="padding:20px 0"><div class="inq-empty-text">문의 내역이 없습니다</div></div>';return}
+    var html='';
+    my.forEach(function(q){
+      var st=q.status==='done'?'done':'new';
+      html+='<div class="inq-item">'
+        +'<div class="inq-item-top">'
+        +'<span class="inq-item-name">'+(q.date||'')+'</span>'
+        +'<span class="inq-item-status status-'+st+'">'+(st==='done'?'답변완료':'접수중')+'</span>'
+        +'</div>'
+        +'<div class="inq-item-msg" style="white-space:normal">'+(q.message||'')+'</div>'
+        +'</div>';
+    });
+    el.innerHTML=html;
+  }
+
   // 초기화
-  loadEdit();
-  if(sessionStorage.getItem('dd_admin')==='1'){
-    loginScreen.style.display='none';
-    appShell.style.display='flex';
-    refreshStats();
+  var savedUser=sessionStorage.getItem('dd_user');
+  var savedRole=sessionStorage.getItem('dd_role');
+  if(savedUser && savedRole){
+    enterApp(savedRole);
   }
 })();
 </script>

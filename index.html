@@ -135,6 +135,42 @@ input,textarea,select{font-family:inherit}
 .pc-bg .sub{font-size:11px;color:#9CA3AF;margin-top:6px}
 @media(max-width:1080px){.pc-bg{display:none}}
 
+/* 템플릿 카드 */
+.tpl-section{margin-top:20px}
+.tpl-section-title{font-size:15px;font-weight:700;margin-bottom:12px}
+.tpl-grid{display:flex;flex-direction:column;gap:14px}
+.tpl-card{
+  border-radius:14px;overflow:hidden;border:1px solid #f3f4f6;
+  background:#fff;transition:all .15s;cursor:pointer;
+}
+.tpl-card:active{transform:scale(.98)}
+.tpl-thumb{height:180px;position:relative;overflow:hidden}
+.tpl-badge{position:absolute;top:10px;left:10px;font-size:10px;font-weight:600;padding:3px 10px;border-radius:8px;color:#fff}
+.tpl-badge.new{background:#ef4444}
+.tpl-badge.pop{background:#F97316}
+.tpl-badge.pre{background:#2563EB}
+.tpl-info{padding:14px}
+.tpl-name{font-size:14px;font-weight:700;margin-bottom:4px}
+.tpl-desc{font-size:12px;color:#6B7280;line-height:1.5}
+.tpl-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.tpl-tag{font-size:10px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:#6B7280}
+
+/* 템플릿 상세 */
+.tpl-detail{padding:0}
+.tpl-detail-header{position:sticky;top:0;z-index:10;background:#fff;padding:12px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:10px}
+.tpl-detail-header h2{font-size:16px;font-weight:700;flex:1}
+.tpl-detail-body{padding:0}
+.tpl-preview-full{width:100%;min-height:500px;overflow:hidden}
+.tpl-detail-info{padding:20px 16px}
+.tpl-detail-name{font-size:20px;font-weight:700;margin-bottom:6px}
+.tpl-detail-desc{font-size:13px;color:#6B7280;line-height:1.7;margin-bottom:16px}
+.tpl-features{margin-bottom:16px}
+.tpl-features h3{font-size:14px;font-weight:600;margin-bottom:8px}
+.tpl-feat{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#374151;margin-bottom:6px;line-height:1.5}
+.tpl-feat span{color:#0B6954}
+.tpl-apply{display:block;width:calc(100% - 32px);margin:0 16px 24px;padding:14px;background:#0B6954;color:#fff;border-radius:12px;font-size:15px;font-weight:600;text-align:center}
+.tpl-apply:hover{background:#095443}
+
 /* Toast */
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#1F2937;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;transition:all .3s;z-index:99999;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -258,6 +294,92 @@ input,textarea,select{font-family:inherit}
             <div class="stat"><div class="stat-val" id="mPopup">0</div><div class="stat-lbl">활성 팝업</div></div>
             <div class="stat"><div class="stat-val" id="mImg">0</div><div class="stat-lbl">등록 이미지</div></div>
           </div>
+
+          <!-- 템플릿 갤러리 -->
+          <div class="tpl-section">
+            <div class="tpl-section-title">🎨 홈페이지 템플릿</div>
+            <div class="tpl-grid">
+
+              <!-- 1. 클린 미니멀 -->
+              <div class="tpl-card" onclick="window._openTpl(0)">
+                <div class="tpl-thumb" style="background:linear-gradient(135deg,#f8fafc,#e2e8f0);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px">
+                  <div style="width:80%;height:10px;background:#0B6954;border-radius:6px;opacity:.8"></div>
+                  <div style="display:flex;gap:8px;width:80%">
+                    <div style="flex:1;height:60px;background:#fff;border-radius:8px;border:1px solid #e2e8f0"></div>
+                    <div style="flex:1;height:60px;background:#fff;border-radius:8px;border:1px solid #e2e8f0"></div>
+                  </div>
+                  <div style="width:80%;height:40px;background:#0B6954;border-radius:8px;opacity:.15"></div>
+                  <span class="tpl-badge new">NEW</span>
+                </div>
+                <div class="tpl-info">
+                  <div class="tpl-name">클린 미니멀</div>
+                  <div class="tpl-desc">여백을 활용한 깔끔한 디자인. 2025 트렌드 '비워내기' 콘셉트를 반영한 세련된 레이아웃</div>
+                  <div class="tpl-tags"><span class="tpl-tag">미니멀</span><span class="tpl-tag">화이트톤</span><span class="tpl-tag">반응형</span></div>
+                </div>
+              </div>
+
+              <!-- 2. 모던 프리미엄 -->
+              <div class="tpl-card" onclick="window._openTpl(1)">
+                <div class="tpl-thumb" style="background:linear-gradient(135deg,#1e293b,#334155);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px">
+                  <div style="width:70%;text-align:center;color:#fff;font-size:18px;font-weight:800;letter-spacing:2px">DENTAL</div>
+                  <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent)"></div>
+                  <div style="display:flex;gap:6px">
+                    <div style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)"></div>
+                    <div style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)"></div>
+                    <div style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)"></div>
+                  </div>
+                  <span class="tpl-badge pop">POPULAR</span>
+                </div>
+                <div class="tpl-info">
+                  <div class="tpl-name">모던 프리미엄</div>
+                  <div class="tpl-desc">다크 컬러 기반의 고급스러운 디자인. 임플란트·심미치료 전문 치과에 적합한 프리미엄 느낌</div>
+                  <div class="tpl-tags"><span class="tpl-tag">프리미엄</span><span class="tpl-tag">다크톤</span><span class="tpl-tag">대담한</span></div>
+                </div>
+              </div>
+
+              <!-- 3. 소프트 케어 -->
+              <div class="tpl-card" onclick="window._openTpl(2)">
+                <div class="tpl-thumb" style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px">
+                  <div style="width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 12px rgba(11,105,84,.1)">🦷</div>
+                  <div style="width:70%;display:flex;gap:6px;justify-content:center">
+                    <div style="height:8px;width:40px;background:#0B6954;border-radius:4px;opacity:.3"></div>
+                    <div style="height:8px;width:40px;background:#0B6954;border-radius:4px;opacity:.5"></div>
+                    <div style="height:8px;width:40px;background:#0B6954;border-radius:4px;opacity:.3"></div>
+                  </div>
+                  <div style="width:80%;height:30px;background:#fff;border-radius:20px;opacity:.7"></div>
+                  <span class="tpl-badge pre">PREMIUM</span>
+                </div>
+                <div class="tpl-info">
+                  <div class="tpl-name">소프트 케어</div>
+                  <div class="tpl-desc">따뜻하고 부드러운 분위기. 소아치과·가족치과에 어울리는 친근한 스파 인스파이어드 디자인</div>
+                  <div class="tpl-tags"><span class="tpl-tag">소프트</span><span class="tpl-tag">그린톤</span><span class="tpl-tag">친근한</span></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 회원: 템플릿 상세 ===== -->
+      <div class="panel" id="pMemberTplDetail">
+        <div class="tpl-detail">
+          <div class="tpl-detail-header">
+            <button onclick="window._switchTab(0)" style="font-size:20px;padding:4px 8px">←</button>
+            <h2 id="tplDetailTitle">템플릿</h2>
+          </div>
+          <div class="tpl-detail-body">
+            <div class="tpl-preview-full" id="tplPreviewArea"></div>
+            <div class="tpl-detail-info">
+              <div class="tpl-detail-name" id="tplDName"></div>
+              <div class="tpl-detail-desc" id="tplDDesc"></div>
+              <div class="tpl-features">
+                <h3>주요 특징</h3>
+                <div id="tplDFeatures"></div>
+              </div>
+            </div>
+            <button class="tpl-apply" onclick="window._applyTpl()">이 템플릿 적용하기</button>
+          </div>
         </div>
       </div>
 
@@ -342,7 +464,7 @@ input,textarea,select{font-family:inherit}
   var adminTabs=[{icon:'🏠',text:'홈'},{icon:'👥',text:'회원관리'},{icon:'⚙️',text:'설정'}];
   var editingMemberId='';
 
-  var memberPanels=['pMemberHome','pMemberEdit','pMemberInq','pMemberPreview'];
+  var memberPanels=['pMemberHome','pMemberEdit','pMemberInq','pMemberPreview','pMemberTplDetail'];
   var memberTabs=[{icon:'🏠',text:'홈'},{icon:'✏️',text:'편집'},{icon:'💬',text:'문의'},{icon:'👁️',text:'미리보기'}];
 
   function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');setTimeout(function(){toastEl.classList.remove('show')},2000)}
@@ -548,6 +670,119 @@ input,textarea,select{font-family:inherit}
     });
     el.innerHTML=h;
   }
+
+  // ===== 템플릿 =====
+  var TEMPLATES=[
+    {
+      name:'클린 미니멀',
+      desc:'2025년 트렌드 "비워내기" 콘셉트를 반영한 세련된 레이아웃입니다. 넓은 여백과 큰 타이포그래피로 핵심 정보만 부각시키며, 화이트 기반의 깔끔한 톤이 신뢰감을 줍니다. 스크롤 따라 자연스럽게 펼쳐지는 원페이지 구성으로 모바일에서도 최적의 경험을 제공합니다.',
+      features:['여백 중심의 미니멀 레이아웃','큰 타이포그래피로 핵심 메시지 강조','원페이지 스크롤 구성','모바일 퍼스트 반응형 디자인','온라인 예약 CTA 버튼'],
+      colors:['#ffffff','#f8fafc','#0B6954','#2D3436','#E5E7EB'],
+      preview:function(name){
+        return '<div style="font-family:Noto Sans KR,sans-serif">'
+          +'<div style="background:#fff;padding:40px 24px;text-align:center">'
+          +'<div style="font-size:11px;color:#9CA3AF;letter-spacing:4px;margin-bottom:8px">DENTAL CLINIC</div>'
+          +'<div style="font-size:28px;font-weight:800;color:#2D3436;margin-bottom:6px">'+(name||'OO치과')+'</div>'
+          +'<div style="width:40px;height:2px;background:#0B6954;margin:0 auto 16px"></div>'
+          +'<div style="font-size:13px;color:#6B7280;line-height:1.8">건강한 치아,<br>아름다운 미소를 위한 공간</div>'
+          +'</div>'
+          +'<div style="background:#f8fafc;padding:32px 24px;display:flex;gap:12px">'
+          +'<div style="flex:1;background:#fff;border-radius:12px;padding:20px 12px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)"><div style="font-size:24px;margin-bottom:8px">🦷</div><div style="font-size:12px;font-weight:600">일반진료</div></div>'
+          +'<div style="flex:1;background:#fff;border-radius:12px;padding:20px 12px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)"><div style="font-size:24px;margin-bottom:8px">✨</div><div style="font-size:12px;font-weight:600">심미치료</div></div>'
+          +'<div style="flex:1;background:#fff;border-radius:12px;padding:20px 12px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)"><div style="font-size:24px;margin-bottom:8px">🔩</div><div style="font-size:12px;font-weight:600">임플란트</div></div>'
+          +'</div>'
+          +'<div style="padding:32px 24px;text-align:center">'
+          +'<div style="font-size:16px;font-weight:700;margin-bottom:16px">진료시간 안내</div>'
+          +'<div style="font-size:13px;color:#6B7280;line-height:2">평일 09:00 ~ 18:00<br>토요일 09:00 ~ 13:00<br>점심시간 13:00 ~ 14:00</div>'
+          +'</div>'
+          +'<div style="padding:0 24px 32px"><div style="background:#0B6954;color:#fff;padding:16px;border-radius:12px;text-align:center;font-size:14px;font-weight:600">온라인 예약하기</div></div>'
+          +'</div>';
+      }
+    },
+    {
+      name:'모던 프리미엄',
+      desc:'다크 컬러 기반의 고급스러운 디자인입니다. 2026년 트렌드인 "대담한 디자인"을 반영하여 임플란트·심미치료 등 프리미엄 진료에 특화된 이미지를 전달합니다. 골드 포인트 컬러와 세리프 타이포그래피로 격조 있는 느낌을 완성합니다.',
+      features:['다크 배경의 프리미엄 감성','골드 포인트 컬러 활용','대담한 히어로 섹션','의료진 소개 섹션 포함','Before/After 갤러리 지원'],
+      colors:['#1e293b','#0f172a','#d4a574','#ffffff','#94a3b8'],
+      preview:function(name){
+        return '<div style="font-family:Noto Sans KR,sans-serif">'
+          +'<div style="background:linear-gradient(180deg,#0f172a,#1e293b);padding:48px 24px;text-align:center">'
+          +'<div style="font-size:10px;color:#d4a574;letter-spacing:6px;margin-bottom:12px">PREMIUM DENTAL</div>'
+          +'<div style="font-size:26px;font-weight:800;color:#fff;margin-bottom:8px">'+(name||'OO치과')+'</div>'
+          +'<div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,#d4a574,transparent);margin:0 auto 16px"></div>'
+          +'<div style="font-size:12px;color:#94a3b8;line-height:1.8">최고의 기술력으로<br>완벽한 미소를 디자인합니다</div>'
+          +'</div>'
+          +'<div style="background:#1e293b;padding:24px;display:flex;gap:10px">'
+          +'<div style="flex:1;border:1px solid rgba(212,165,116,.3);border-radius:10px;padding:20px 8px;text-align:center"><div style="font-size:22px;margin-bottom:6px">💎</div><div style="font-size:11px;color:#d4a574;font-weight:600">심미보철</div></div>'
+          +'<div style="flex:1;border:1px solid rgba(212,165,116,.3);border-radius:10px;padding:20px 8px;text-align:center"><div style="font-size:22px;margin-bottom:6px">🔩</div><div style="font-size:11px;color:#d4a574;font-weight:600">임플란트</div></div>'
+          +'<div style="flex:1;border:1px solid rgba(212,165,116,.3);border-radius:10px;padding:20px 8px;text-align:center"><div style="font-size:22px;margin-bottom:6px">😁</div><div style="font-size:11px;color:#d4a574;font-weight:600">치아교정</div></div>'
+          +'</div>'
+          +'<div style="background:#0f172a;padding:32px 24px;text-align:center">'
+          +'<div style="font-size:14px;font-weight:600;color:#d4a574;margin-bottom:16px">MEDICAL TEAM</div>'
+          +'<div style="display:flex;gap:12px;justify-content:center">'
+          +'<div><div style="width:56px;height:56px;border-radius:50%;background:#334155;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:20px">👨‍⚕️</div><div style="font-size:11px;color:#fff">대표원장</div></div>'
+          +'<div><div style="width:56px;height:56px;border-radius:50%;background:#334155;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:20px">👩‍⚕️</div><div style="font-size:11px;color:#fff">부원장</div></div>'
+          +'</div></div>'
+          +'<div style="background:#1e293b;padding:0 24px 32px"><div style="background:linear-gradient(135deg,#d4a574,#c49660);color:#0f172a;padding:16px;border-radius:12px;text-align:center;font-size:14px;font-weight:700">프리미엄 상담 예약</div></div>'
+          +'</div>';
+      }
+    },
+    {
+      name:'소프트 케어',
+      desc:'따뜻하고 부드러운 그린 톤의 친근한 디자인입니다. 스파 인스파이어드 콘셉트로 소아치과·가족치과에 특히 어울리며, 둥근 모서리와 부드러운 그라데이션이 편안한 인상을 줍니다. 환자 후기와 진료과목이 자연스럽게 배치됩니다.',
+      features:['소프트 그린 컬러 팔레트','둥근 모서리의 친근한 UI','환자 후기 캐러셀 섹션','진료과목 아이콘 그리드','카카오톡 상담 연동 버튼'],
+      colors:['#ecfdf5','#d1fae5','#0B6954','#065F46','#f0fdf4'],
+      preview:function(name){
+        return '<div style="font-family:Noto Sans KR,sans-serif">'
+          +'<div style="background:linear-gradient(180deg,#ecfdf5,#d1fae5);padding:40px 24px;text-align:center;border-radius:0 0 24px 24px">'
+          +'<div style="width:64px;height:64px;border-radius:50%;background:#fff;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 4px 16px rgba(11,105,84,.12)">🦷</div>'
+          +'<div style="font-size:22px;font-weight:800;color:#065F46;margin-bottom:4px">'+(name||'OO치과')+'</div>'
+          +'<div style="font-size:12px;color:#059669">온 가족의 건강한 미소를 함께합니다</div>'
+          +'</div>'
+          +'<div style="padding:24px 16px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px">'
+          +'<div style="background:#f0fdf4;border-radius:14px;padding:18px 12px;text-align:center"><div style="font-size:24px;margin-bottom:6px">👶</div><div style="font-size:12px;font-weight:600;color:#065F46">소아치과</div></div>'
+          +'<div style="background:#f0fdf4;border-radius:14px;padding:18px 12px;text-align:center"><div style="font-size:24px;margin-bottom:6px">🪥</div><div style="font-size:12px;font-weight:600;color:#065F46">예방치료</div></div>'
+          +'<div style="background:#f0fdf4;border-radius:14px;padding:18px 12px;text-align:center"><div style="font-size:24px;margin-bottom:6px">😊</div><div style="font-size:12px;font-weight:600;color:#065F46">치아교정</div></div>'
+          +'<div style="background:#f0fdf4;border-radius:14px;padding:18px 12px;text-align:center"><div style="font-size:24px;margin-bottom:6px">✨</div><div style="font-size:12px;font-weight:600;color:#065F46">미백치료</div></div>'
+          +'</div>'
+          +'<div style="padding:0 16px 16px"><div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)">'
+          +'<div style="font-size:13px;font-weight:600;color:#065F46;margin-bottom:10px">⭐ 환자 후기</div>'
+          +'<div style="font-size:12px;color:#6B7280;line-height:1.7">"아이가 치과를 무서워했는데 여기서는 즐겁게 다녀요. 선생님이 정말 친절하세요!"</div>'
+          +'<div style="font-size:11px;color:#9CA3AF;margin-top:6px">- 김○○ 보호자</div>'
+          +'</div></div>'
+          +'<div style="padding:0 16px;display:flex;gap:10px;padding-bottom:24px">'
+          +'<div style="flex:1;background:#FEE500;color:#3C1E1E;padding:14px;border-radius:12px;text-align:center;font-size:13px;font-weight:600">💬 카카오 상담</div>'
+          +'<div style="flex:1;background:#0B6954;color:#fff;padding:14px;border-radius:12px;text-align:center;font-size:13px;font-weight:600">📞 전화 예약</div>'
+          +'</div></div>';
+      }
+    }
+  ];
+
+  var selectedTplIdx=-1;
+
+  window._openTpl=function(idx){
+    selectedTplIdx=idx;
+    var t=TEMPLATES[idx];
+    var editData=JSON.parse(localStorage.getItem('dd_edit_'+currentUser)||'{}');
+    var clinicName=editData.name||'OO치과';
+    document.getElementById('tplDetailTitle').textContent=t.name;
+    document.getElementById('tplDName').textContent=t.name;
+    document.getElementById('tplDDesc').textContent=t.desc;
+    document.getElementById('tplPreviewArea').innerHTML=t.preview(clinicName);
+    var fhtml='';
+    t.features.forEach(function(f){fhtml+='<div class="tpl-feat"><span>✓</span> '+f+'</div>'});
+    document.getElementById('tplDFeatures').innerHTML=fhtml;
+    // index 4 = pMemberTplDetail
+    currentPanels.forEach(function(id,i){document.getElementById(id).classList.toggle('active',i===4)});
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+  };
+
+  window._applyTpl=function(){
+    if(selectedTplIdx<0) return;
+    localStorage.setItem('dd_tpl_'+currentUser,selectedTplIdx.toString());
+    toast(TEMPLATES[selectedTplIdx].name+' 템플릿이 적용되었습니다');
+    window._switchTab(0);
+  };
 
   // 더미 데이터 초기 세팅
   function initDummy(){

@@ -549,7 +549,10 @@ input,textarea,select{font-family:inherit}
         <div class="section-pad">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
             <h2 style="font-size:17px;font-weight:700">홈페이지 미리보기</h2>
-            <button class="edit-mode-btn" id="editModeBtn" onclick="window._toggleEditMode()">편집 모드</button>
+            <div style="display:flex;gap:6px">
+              <button class="edit-mode-btn" id="editModeBtn" onclick="window._toggleEditMode()">편집 모드</button>
+              <button class="edit-mode-btn" id="pcEditModeBtn" onclick="window._openPcEditMode()">PC 편집</button>
+            </div>
           </div>
           <div class="edit-toolbar" id="editToolbar">
             <div class="tb-label">크기</div>
@@ -1267,6 +1270,57 @@ input,textarea,select{font-family:inherit}
       selectedEl.style.fontStyle=isIt?'normal':'italic';
       document.getElementById('tbItalic').classList.toggle('active',!isIt);
     }
+  };
+
+  window._openPcEditMode=function(){
+    var content=document.getElementById('previewBody').innerHTML||getPreviewHtml();
+    var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+      +'<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">'
+      +'<title>PC 편집 모드</title>'
+      +'<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Noto Sans KR,sans-serif;background:#f0f1f5}'
+      +'.pc-toolbar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1F2937;padding:10px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:0 2px 12px rgba(0,0,0,.2)}'
+      +'.pc-toolbar label{font-size:12px;color:#9CA3AF}'
+      +'.pc-toolbar select,.pc-toolbar input[type=number]{background:#374151;color:#fff;border:1px solid #4B5563;border-radius:6px;padding:5px 10px;font-size:13px;font-family:inherit}'
+      +'.pc-toolbar input[type=color]{width:32px;height:32px;border:none;border-radius:6px;cursor:pointer;background:none;padding:0}'
+      +'.pc-toolbar .tb-btn{background:#374151;color:#fff;border:1px solid #4B5563;border-radius:6px;padding:5px 14px;font-size:13px;cursor:pointer;font-family:inherit}'
+      +'.pc-toolbar .tb-btn:hover{background:#4B5563}'
+      +'.pc-toolbar .tb-btn.active{background:#0B6954;border-color:#0B6954}'
+      +'.pc-toolbar .tb-btn.save{background:#0B6954;border-color:#0B6954;font-weight:600}'
+      +'.pc-toolbar .tb-divider{width:1px;height:24px;background:#4B5563}'
+      +'.pc-content{max-width:1200px;margin:70px auto 40px;background:#fff;box-shadow:0 0 40px rgba(0,0,0,.08)}'
+      +'[contenteditable=true]{outline:2px dashed rgba(11,105,84,.3);outline-offset:2px;cursor:text;min-height:16px}'
+      +'[contenteditable=true]:focus{outline:2px solid #0B6954}'
+      +'</style></head><body>'
+      +'<div class="pc-toolbar">'
+      +'<label>크기</label><input type="number" id="pcFs" value="14" min="8" max="72" style="width:60px" onchange="applyStyle(\'fontSize\')">'
+      +'<div class="tb-divider"></div>'
+      +'<label>글자색</label><input type="color" id="pcColor" value="#333333" onchange="applyStyle(\'color\')">'
+      +'<div class="tb-divider"></div>'
+      +'<label>배경색</label><input type="color" id="pcBg" value="#ffffff" onchange="applyStyle(\'bgColor\')">'
+      +'<div class="tb-divider"></div>'
+      +'<button class="tb-btn" id="pcBold" onclick="applyStyle(\'bold\')"><b>B</b></button>'
+      +'<button class="tb-btn" id="pcItalic" onclick="applyStyle(\'italic\')" style="font-style:italic">I</button>'
+      +'<div class="tb-divider"></div>'
+      +'<button class="tb-btn save" onclick="saveBack()">저장하고 닫기</button>'
+      +'</div>'
+      +'<div class="pc-content" id="pcBody">'+content+'</div>'
+      +'<script>'
+      +'var sel=null;'
+      +'function init(){var els=document.getElementById("pcBody").querySelectorAll("div,span");els.forEach(function(el){if(el.children.length===0||(el.children.length===1&&el.children[0].tagName==="BR")){el.setAttribute("contenteditable","true");el.addEventListener("click",function(e){e.stopPropagation();selectEl(el)})}})}'
+      +'function selectEl(el){if(sel)sel.style.outline="";sel=el;el.style.outline="2px solid #0B6954";var cs=getComputedStyle(el);document.getElementById("pcFs").value=parseInt(cs.fontSize)||14;document.getElementById("pcColor").value=rgbHex(cs.color);document.getElementById("pcBg").value=rgbHex(cs.backgroundColor);document.getElementById("pcBold").classList.toggle("active",parseInt(cs.fontWeight)>=700);document.getElementById("pcItalic").classList.toggle("active",cs.fontStyle==="italic")}'
+      +'function rgbHex(rgb){if(!rgb||rgb==="transparent"||rgb.indexOf("rgba")===0)return"#ffffff";var m=rgb.match(/\\d+/g);if(!m||m.length<3)return"#333333";return"#"+((1<<24)+(parseInt(m[0])<<16)+(parseInt(m[1])<<8)+parseInt(m[2])).toString(16).slice(1)}'
+      +'function applyStyle(t){if(!sel)return;if(t==="fontSize")sel.style.fontSize=document.getElementById("pcFs").value+"px";else if(t==="color")sel.style.color=document.getElementById("pcColor").value;else if(t==="bgColor")sel.style.backgroundColor=document.getElementById("pcBg").value;else if(t==="bold"){var b=parseInt(getComputedStyle(sel).fontWeight)>=700;sel.style.fontWeight=b?"400":"700";document.getElementById("pcBold").classList.toggle("active",!b)}else if(t==="italic"){var it=getComputedStyle(sel).fontStyle==="italic";sel.style.fontStyle=it?"normal":"italic";document.getElementById("pcItalic").classList.toggle("active",!it)}}'
+      +'function saveBack(){var c=document.getElementById("pcBody").cloneNode(true);c.querySelectorAll("[contenteditable]").forEach(function(el){el.removeAttribute("contenteditable");el.style.outline=""});if(window.opener){window.opener._pcEditCallback(c.innerHTML);window.close()}else{alert("저장 완료. 창을 닫아주세요.")}}'
+      +'init();'
+      +'</'+'script></body></html>';
+    var w=window.open('','_blank','width=1280,height=900');
+    if(w){w.document.write(html);w.document.close()}
+  };
+
+  window._pcEditCallback=function(html){
+    document.getElementById('previewBody').innerHTML=html;
+    localStorage.setItem('dd_custom_html_'+currentUser,html);
+    toast('PC 편집 내용이 저장되었습니다');
   };
 
   window._savePreviewEdit=function(){

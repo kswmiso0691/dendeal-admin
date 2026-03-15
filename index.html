@@ -196,6 +196,33 @@ input,textarea,select{font-family:inherit}
         </div>
       </div>
 
+      <!-- ===== 관리자: 회원 홈페이지 편집 ===== -->
+      <div class="panel" id="pAdminEdit">
+        <div class="section-pad">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+            <button onclick="window._switchTab(1)" style="font-size:20px;padding:4px 8px">←</button>
+            <h2 style="font-size:17px;font-weight:700" id="adminEditTitle">홈페이지 편집</h2>
+          </div>
+          <div class="card">
+            <div class="edit-title">📌 기본 정보</div>
+            <div class="field"><label>치과 이름</label><input type="text" id="aEditName" placeholder="치과 이름을 입력하세요"></div>
+            <div class="field"><label>전화번호</label><input type="tel" id="aEditPhone" placeholder="031-000-0000"></div>
+            <div class="field"><label>주소</label><input type="text" id="aEditAddr" placeholder="주소를 입력하세요"></div>
+          </div>
+          <div class="card">
+            <div class="edit-title">🕐 진료시간</div>
+            <div class="field"><label>평일</label><input type="text" id="aEditWeekday" placeholder="09:00 ~ 18:00"></div>
+            <div class="field"><label>토요일</label><input type="text" id="aEditSat" placeholder="09:00 ~ 13:00"></div>
+            <div class="field"><label>점심시간</label><input type="text" id="aEditLunch" placeholder="13:00 ~ 14:00"></div>
+          </div>
+          <div class="card">
+            <div class="edit-title">📝 소개글</div>
+            <div class="field"><label>홈페이지 소개</label><textarea id="aEditIntro" rows="4" placeholder="홈페이지에 표시될 소개글을 입력하세요"></textarea></div>
+          </div>
+          <button class="btn-primary" onclick="window._adminSaveEdit()">저장하기</button>
+        </div>
+      </div>
+
       <!-- ===== 관리자: 설정 ===== -->
       <div class="panel" id="pAdminSett">
         <div class="section-pad">
@@ -310,8 +337,9 @@ input,textarea,select{font-family:inherit}
 
   var currentRole='',currentUser='',currentPanels=[];
 
-  var adminPanels=['pAdminHome','pAdminMembers','pAdminSett'];
+  var adminPanels=['pAdminHome','pAdminMembers','pAdminSett','pAdminEdit'];
   var adminTabs=[{icon:'🏠',text:'홈'},{icon:'👥',text:'회원관리'},{icon:'⚙️',text:'설정'}];
+  var editingMemberId='';
 
   var memberPanels=['pMemberHome','pMemberEdit','pMemberInq','pMemberPreview'];
   var memberTabs=[{icon:'🏠',text:'홈'},{icon:'✏️',text:'편집'},{icon:'💬',text:'문의'},{icon:'👁️',text:'미리보기'}];
@@ -425,6 +453,7 @@ input,textarea,select{font-family:inherit}
         +'<div class="member-avatar">'+initial+'</div>'
         +'<div class="member-info"><div class="member-name">'+x.name+'</div><div class="member-detail">ID: '+x.id+' · 가입: '+x.date+' · '+(x.status==='active'?'활성':'비활성')+'</div></div>'
         +'<div class="member-actions">'
+        +'<button class="mbtn-view" onclick="window._editMemberSite(\''+x.id+'\',\''+x.name+'\')">편집</button>'
         +'<button class="mbtn-del" onclick="window._delMember('+i+')">삭제</button>'
         +'</div></div>';
     });
@@ -435,6 +464,38 @@ input,textarea,select{font-family:inherit}
     if(!confirm('이 회원을 삭제하시겠습니까?'))return;
     var m=getMembers();m.splice(i,1);saveMembers(m);
     refreshMembers();refreshAdminStats();toast('회원이 삭제되었습니다');
+  };
+
+  // 관리자: 회원 홈페이지 편집
+  window._editMemberSite=function(memberId,memberName){
+    editingMemberId=memberId;
+    document.getElementById('adminEditTitle').textContent=memberName+' 홈페이지 편집';
+    var d=JSON.parse(localStorage.getItem('dd_edit_'+memberId)||'{}');
+    document.getElementById('aEditName').value=d.name||'';
+    document.getElementById('aEditPhone').value=d.phone||'';
+    document.getElementById('aEditAddr').value=d.addr||'';
+    document.getElementById('aEditWeekday').value=d.weekday||'';
+    document.getElementById('aEditSat').value=d.sat||'';
+    document.getElementById('aEditLunch').value=d.lunch||'';
+    document.getElementById('aEditIntro').value=d.intro||'';
+    // pAdminEdit는 index 3
+    currentPanels.forEach(function(id,i){document.getElementById(id).classList.toggle('active',i===3)});
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+  };
+
+  window._adminSaveEdit=function(){
+    if(!editingMemberId)return;
+    var data={
+      name:document.getElementById('aEditName').value,
+      phone:document.getElementById('aEditPhone').value,
+      addr:document.getElementById('aEditAddr').value,
+      weekday:document.getElementById('aEditWeekday').value,
+      sat:document.getElementById('aEditSat').value,
+      lunch:document.getElementById('aEditLunch').value,
+      intro:document.getElementById('aEditIntro').value
+    };
+    localStorage.setItem('dd_edit_'+editingMemberId,JSON.stringify(data));
+    toast('저장되었습니다');
   };
 
   // ===== 회원 기능 =====

@@ -135,6 +135,26 @@ input,textarea,select{font-family:inherit}
 .pc-bg .sub{font-size:11px;color:#9CA3AF;margin-top:6px}
 @media(max-width:1080px){.pc-bg{display:none}}
 
+/* 이미지 업로드 */
+.img-upload{margin-bottom:12px}
+.img-upload label.up-label{display:block;font-size:12px;color:#6B7280;margin-bottom:4px;font-weight:500}
+.img-grid{display:flex;gap:8px;flex-wrap:wrap}
+.img-slot{
+  width:80px;height:80px;border-radius:10px;border:2px dashed #D1D5DB;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  cursor:pointer;overflow:hidden;position:relative;background:#f9fafb;flex-shrink:0;
+}
+.img-slot img{width:100%;height:100%;object-fit:cover}
+.img-slot .plus{font-size:24px;color:#D1D5DB;line-height:1}
+.img-slot .plus-txt{font-size:9px;color:#D1D5DB;margin-top:2px}
+.img-slot .del-btn{
+  position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;
+  background:rgba(0,0,0,.6);color:#fff;font-size:10px;display:flex;
+  align-items:center;justify-content:center;z-index:2;
+}
+.img-slot input[type=file]{display:none}
+.edit-section-sub{font-size:11px;color:#9CA3AF;margin-bottom:10px}
+
 /* 템플릿 카드 */
 .tpl-section{margin-top:20px}
 .tpl-section-title{font-size:15px;font-weight:700;margin-bottom:12px}
@@ -244,6 +264,29 @@ input,textarea,select{font-family:inherit}
             <div class="field"><label>치과 이름</label><input type="text" id="aEditName" placeholder="치과 이름을 입력하세요"></div>
             <div class="field"><label>전화번호</label><input type="tel" id="aEditPhone" placeholder="031-000-0000"></div>
             <div class="field"><label>주소</label><input type="text" id="aEditAddr" placeholder="주소를 입력하세요"></div>
+            <div class="field"><label>소개글</label><textarea id="aEditIntro" rows="3" placeholder="치과 소개글을 입력하세요"></textarea></div>
+          </div>
+          <div class="card">
+            <div class="edit-title">🖼️ 히어로 배너</div>
+            <div class="img-upload"><div class="img-grid" id="aImgHero"></div></div>
+          </div>
+          <div class="card">
+            <div class="edit-title">👨‍⚕️ 대표원장</div>
+            <div class="field"><label>원장 이름</label><input type="text" id="aEditDocName" placeholder="홍길동"></div>
+            <div class="field"><label>전문 분야</label><input type="text" id="aEditDocSpec" placeholder="임플란트/교정 전문"></div>
+            <div class="img-upload"><div class="img-grid" id="aImgDoc"></div></div>
+          </div>
+          <div class="card">
+            <div class="edit-title">🦷 진료과목 이미지</div>
+            <div class="img-upload"><div class="img-grid" id="aImgDept"></div></div>
+          </div>
+          <div class="card">
+            <div class="edit-title">📸 치료사례</div>
+            <div class="img-upload"><div class="img-grid" id="aImgCases"></div></div>
+          </div>
+          <div class="card">
+            <div class="edit-title">🏥 병원시설</div>
+            <div class="img-upload"><div class="img-grid" id="aImgFacility"></div></div>
           </div>
           <div class="card">
             <div class="edit-title">🕐 진료시간</div>
@@ -252,8 +295,10 @@ input,textarea,select{font-family:inherit}
             <div class="field"><label>점심시간</label><input type="text" id="aEditLunch" placeholder="13:00 ~ 14:00"></div>
           </div>
           <div class="card">
-            <div class="edit-title">📝 소개글</div>
-            <div class="field"><label>홈페이지 소개</label><textarea id="aEditIntro" rows="4" placeholder="홈페이지에 표시될 소개글을 입력하세요"></textarea></div>
+            <div class="edit-title">📍 오시는 길</div>
+            <div class="field"><label>지하철</label><input type="text" id="aEditSubway" placeholder="O호선 OO역 O번출구 도보 5분"></div>
+            <div class="field"><label>버스</label><input type="text" id="aEditBus" placeholder="OOO번 OO정류장 하차"></div>
+            <div class="field"><label>주차</label><input type="text" id="aEditParking" placeholder="건물 내 주차 가능 (2시간 무료)"></div>
           </div>
           <button class="btn-primary" onclick="window._adminSaveEdit()">저장하기</button>
         </div>
@@ -392,22 +437,69 @@ input,textarea,select{font-family:inherit}
       <div class="panel" id="pMemberEdit">
         <div class="section-pad">
           <h2 style="font-size:17px;font-weight:700;margin-bottom:16px">✏️ 홈페이지 편집</h2>
+
+          <!-- 기본 정보 -->
           <div class="card">
             <div class="edit-title">📌 기본 정보</div>
             <div class="field"><label>치과 이름</label><input type="text" id="editName" placeholder="치과 이름을 입력하세요"></div>
             <div class="field"><label>전화번호</label><input type="tel" id="editPhone" placeholder="031-000-0000"></div>
             <div class="field"><label>주소</label><input type="text" id="editAddr" placeholder="주소를 입력하세요"></div>
+            <div class="field"><label>소개글</label><textarea id="editIntro" rows="3" placeholder="치과 소개글을 입력하세요"></textarea></div>
           </div>
+
+          <!-- 히어로 배너 -->
+          <div class="card">
+            <div class="edit-title">🖼️ 히어로 배너</div>
+            <div class="edit-section-sub">메인 상단에 표시되는 대표 이미지</div>
+            <div class="img-upload"><div class="img-grid" id="imgHero"></div></div>
+          </div>
+
+          <!-- 대표원장 -->
+          <div class="card">
+            <div class="edit-title">👨‍⚕️ 대표원장</div>
+            <div class="field"><label>원장 이름</label><input type="text" id="editDocName" placeholder="홍길동"></div>
+            <div class="field"><label>전문 분야</label><input type="text" id="editDocSpec" placeholder="임플란트/교정 전문"></div>
+            <div class="edit-section-sub">원장 프로필 사진</div>
+            <div class="img-upload"><div class="img-grid" id="imgDoc"></div></div>
+          </div>
+
+          <!-- 진료과목 -->
+          <div class="card">
+            <div class="edit-title">🦷 진료과목</div>
+            <div class="edit-section-sub">진료과목별 대표 이미지</div>
+            <div class="img-upload"><div class="img-grid" id="imgDept"></div></div>
+          </div>
+
+          <!-- 치료사례 -->
+          <div class="card">
+            <div class="edit-title">📸 치료사례</div>
+            <div class="edit-section-sub">Before/After 사례 이미지</div>
+            <div class="img-upload"><div class="img-grid" id="imgCases"></div></div>
+          </div>
+
+          <!-- 병원시설 -->
+          <div class="card">
+            <div class="edit-title">🏥 병원시설</div>
+            <div class="edit-section-sub">진료실, 대기실, 상담실 등</div>
+            <div class="img-upload"><div class="img-grid" id="imgFacility"></div></div>
+          </div>
+
+          <!-- 진료시간 -->
           <div class="card">
             <div class="edit-title">🕐 진료시간</div>
             <div class="field"><label>평일</label><input type="text" id="editWeekday" placeholder="09:00 ~ 18:00"></div>
             <div class="field"><label>토요일</label><input type="text" id="editSat" placeholder="09:00 ~ 13:00"></div>
             <div class="field"><label>점심시간</label><input type="text" id="editLunch" placeholder="13:00 ~ 14:00"></div>
           </div>
+
+          <!-- 오시는 길 -->
           <div class="card">
-            <div class="edit-title">📝 소개글</div>
-            <div class="field"><label>홈페이지 소개</label><textarea id="editIntro" rows="4" placeholder="홈페이지에 표시될 소개글을 입력하세요"></textarea></div>
+            <div class="edit-title">📍 오시는 길</div>
+            <div class="field"><label>지하철</label><input type="text" id="editSubway" placeholder="O호선 OO역 O번출구 도보 5분"></div>
+            <div class="field"><label>버스</label><input type="text" id="editBus" placeholder="OOO번 OO정류장 하차"></div>
+            <div class="field"><label>주차</label><input type="text" id="editParking" placeholder="건물 내 주차 가능 (2시간 무료)"></div>
           </div>
+
           <button class="btn-primary" onclick="window._saveEdit()">저장하기</button>
         </div>
       </div>
@@ -606,7 +698,12 @@ input,textarea,select{font-family:inherit}
     document.getElementById('aEditSat').value=d.sat||'';
     document.getElementById('aEditLunch').value=d.lunch||'';
     document.getElementById('aEditIntro').value=d.intro||'';
-    // pAdminEdit는 index 3
+    document.getElementById('aEditDocName').value=d.docName||'';
+    document.getElementById('aEditDocSpec').value=d.docSpec||'';
+    document.getElementById('aEditSubway').value=d.subway||'';
+    document.getElementById('aEditBus').value=d.bus||'';
+    document.getElementById('aEditParking').value=d.parking||'';
+    loadImgs(memberId,'a');
     currentPanels.forEach(function(id,i){document.getElementById(id).classList.toggle('active',i===3)});
     document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
   };
@@ -620,18 +717,87 @@ input,textarea,select{font-family:inherit}
       weekday:document.getElementById('aEditWeekday').value,
       sat:document.getElementById('aEditSat').value,
       lunch:document.getElementById('aEditLunch').value,
-      intro:document.getElementById('aEditIntro').value
+      intro:document.getElementById('aEditIntro').value,
+      docName:document.getElementById('aEditDocName').value,
+      docSpec:document.getElementById('aEditDocSpec').value,
+      subway:document.getElementById('aEditSubway').value,
+      bus:document.getElementById('aEditBus').value,
+      parking:document.getElementById('aEditParking').value
     };
     localStorage.setItem('dd_edit_'+editingMemberId,JSON.stringify(data));
+    saveImgs(editingMemberId,'a');
     toast('저장되었습니다');
   };
+
+  // ===== 이미지 업로드 =====
+  var IMG_SECTIONS=['hero','doc','dept','cases','facility'];
+  var imgData={}; // {hero:[base64,...], doc:[...], ...}
+
+  function renderImgGrid(containerId,section,prefix){
+    var el=document.getElementById(containerId);
+    var imgs=imgData[prefix+'_'+section]||[];
+    var h='';
+    imgs.forEach(function(src,i){
+      h+='<div class="img-slot">'
+        +'<img src="'+src+'">'
+        +'<div class="del-btn" onclick="window._delImg(\''+prefix+'\',\''+section+'\','+i+')">✕</div></div>';
+    });
+    h+='<div class="img-slot" onclick="this.querySelector(\'input\').click()">'
+      +'<div class="plus">+</div><div class="plus-txt">추가</div>'
+      +'<input type="file" accept="image/*" onchange="window._addImg(\''+prefix+'\',\''+section+'\',this)"></div>';
+    el.innerHTML=h;
+  }
+
+  window._addImg=function(prefix,section,input){
+    if(!input.files||!input.files[0])return;
+    var key=prefix+'_'+section;
+    if(!imgData[key])imgData[key]=[];
+    var reader=new FileReader();
+    reader.onload=function(e){
+      imgData[key].push(e.target.result);
+      var containerId=(prefix==='m'?'img':'aImg')+section.charAt(0).toUpperCase()+section.slice(1);
+      renderImgGrid(containerId,section,prefix);
+    };
+    reader.readAsDataURL(input.files[0]);
+  };
+
+  window._delImg=function(prefix,section,idx){
+    var key=prefix+'_'+section;
+    if(imgData[key]){imgData[key].splice(idx,1)}
+    var containerId=(prefix==='m'?'img':'aImg')+section.charAt(0).toUpperCase()+section.slice(1);
+    renderImgGrid(containerId,section,prefix);
+  };
+
+  function loadImgs(userId,prefix){
+    IMG_SECTIONS.forEach(function(sec){
+      var key=prefix+'_'+sec;
+      imgData[key]=JSON.parse(localStorage.getItem('dd_img_'+userId+'_'+sec)||'[]');
+      var containerId=(prefix==='m'?'img':'aImg')+sec.charAt(0).toUpperCase()+sec.slice(1);
+      if(document.getElementById(containerId)) renderImgGrid(containerId,sec,prefix);
+    });
+  }
+
+  function saveImgs(userId,prefix){
+    var cnt=0;
+    IMG_SECTIONS.forEach(function(sec){
+      var key=prefix+'_'+sec;
+      var arr=imgData[key]||[];
+      localStorage.setItem('dd_img_'+userId+'_'+sec,JSON.stringify(arr));
+      cnt+=arr.length;
+    });
+    return cnt;
+  }
 
   // ===== 회원 기능 =====
   function refreshMemberStats(){
     var inqs=JSON.parse(localStorage.getItem('dd_inq_'+currentUser)||'[]');
+    var imgCnt=0;
+    IMG_SECTIONS.forEach(function(sec){
+      imgCnt+=JSON.parse(localStorage.getItem('dd_img_'+currentUser+'_'+sec)||'[]').length;
+    });
     document.getElementById('mInq').textContent=inqs.length;
     document.getElementById('mPopup').textContent='0';
-    document.getElementById('mImg').textContent='0';
+    document.getElementById('mImg').textContent=imgCnt;
   }
 
   window._saveEdit=function(){
@@ -642,10 +808,17 @@ input,textarea,select{font-family:inherit}
       weekday:document.getElementById('editWeekday').value,
       sat:document.getElementById('editSat').value,
       lunch:document.getElementById('editLunch').value,
-      intro:document.getElementById('editIntro').value
+      intro:document.getElementById('editIntro').value,
+      docName:document.getElementById('editDocName').value,
+      docSpec:document.getElementById('editDocSpec').value,
+      subway:document.getElementById('editSubway').value,
+      bus:document.getElementById('editBus').value,
+      parking:document.getElementById('editParking').value
     };
     localStorage.setItem('dd_edit_'+currentUser,JSON.stringify(data));
+    saveImgs(currentUser,'m');
     toast('저장되었습니다');
+    refreshMemberStats();
   };
 
   function loadEdit(userId){
@@ -657,6 +830,12 @@ input,textarea,select{font-family:inherit}
     if(d.sat)document.getElementById('editSat').value=d.sat;
     if(d.lunch)document.getElementById('editLunch').value=d.lunch;
     if(d.intro)document.getElementById('editIntro').value=d.intro;
+    if(d.docName)document.getElementById('editDocName').value=d.docName;
+    if(d.docSpec)document.getElementById('editDocSpec').value=d.docSpec;
+    if(d.subway)document.getElementById('editSubway').value=d.subway;
+    if(d.bus)document.getElementById('editBus').value=d.bus;
+    if(d.parking)document.getElementById('editParking').value=d.parking;
+    loadImgs(userId,'m');
   }
 
   function refreshInq(){

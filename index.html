@@ -325,7 +325,8 @@ input,textarea,select{font-family:inherit}
 (function(){
   var ACCOUNTS={
     admin:{pw:'admin123',role:'admin',name:'관리자'},
-    test:{pw:'test123',role:'member',name:'테스트치과'}
+    test:{pw:'test123',role:'member',name:'테스트치과'},
+    smile:{pw:'smile123',role:'member',name:'스마일치과'}
   };
 
   var loginScreen=document.getElementById('loginScreen');
@@ -547,6 +548,44 @@ input,textarea,select{font-family:inherit}
     });
     el.innerHTML=h;
   }
+
+  // 더미 데이터 초기 세팅
+  function initDummy(){
+    if(localStorage.getItem('dd_dummy_init')) return;
+    // 회원 2명
+    var members=[
+      {id:'test',name:'테스트치과',date:'2026-03-10',status:'active'},
+      {id:'smile',name:'스마일치과',date:'2026-03-12',status:'active'}
+    ];
+    localStorage.setItem('dd_members',JSON.stringify(members));
+    // test 회원 홈페이지 데이터
+    localStorage.setItem('dd_edit_test',JSON.stringify({
+      name:'테스트치과',phone:'02-1234-5678',addr:'서울시 강남구 테헤란로 123',
+      weekday:'09:00 ~ 18:00',sat:'09:00 ~ 13:00',lunch:'13:00 ~ 14:00',
+      intro:'건강한 치아, 아름다운 미소! 테스트치과는 최신 장비와 풍부한 경험으로 여러분의 구강 건강을 책임집니다.'
+    }));
+    // smile 회원 홈페이지 데이터
+    localStorage.setItem('dd_edit_smile',JSON.stringify({
+      name:'스마일치과',phone:'031-987-6543',addr:'경기도 성남시 분당구 판교로 456',
+      weekday:'10:00 ~ 19:00',sat:'10:00 ~ 14:00',lunch:'13:00 ~ 14:00',
+      intro:'환한 미소를 되찾아 드립니다. 스마일치과는 임플란트, 교정, 심미치료 전문 치과입니다.'
+    }));
+    // test 회원 문의 데이터
+    localStorage.setItem('dd_inq_test',JSON.stringify([
+      {name:'김영희',phone:'010-1111-2222',email:'kim@email.com',message:'임플란트 상담 가능한가요? 비용과 기간이 궁금합니다.',date:'2026-03-14 10:30',status:'new'},
+      {name:'박철수',phone:'010-3333-4444',email:'park@email.com',message:'스케일링 예약하고 싶습니다. 이번 주 토요일 오전 가능한가요?',date:'2026-03-13 15:20',status:'done'}
+    ]));
+    // smile 회원 문의 데이터
+    localStorage.setItem('dd_inq_smile',JSON.stringify([
+      {name:'이지은',phone:'010-5555-6666',email:'lee@email.com',message:'교정 비용 문의드립니다. 투명교정도 가능한지 알고 싶어요.',date:'2026-03-15 09:15',status:'new'}
+    ]));
+    // smile 계정 등록
+    ACCOUNTS['smile']={pw:'smile123',role:'member',name:'스마일치과'};
+    localStorage.setItem('dd_dummy_init','1');
+  }
+  initDummy();
+  // smile 계정은 항상 등록
+  if(!ACCOUNTS['smile']) ACCOUNTS['smile']={pw:'smile123',role:'member',name:'스마일치과'};
 
   // 초기화
   var savedUser=sessionStorage.getItem('dd_user');

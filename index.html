@@ -236,10 +236,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
       </div>
     </div>
 
-    <!-- dendeal.kr iframe (메인 영역) -->
+    <!-- 메인 영역 -->
     <div class="iframe-wrap">
-      <iframe src="about:blank" id="dendealIframe"></iframe>
-
       <!-- 오버레이 -->
       <div class="overlay" id="overlay"></div>
 
@@ -331,7 +329,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   var appShell=document.getElementById('appShell');
   var loginErr=document.getElementById('loginErr');
   var toastEl=document.getElementById('toast');
-  var dendealIframe=document.getElementById('dendealIframe');
   var fab=document.getElementById('fab');
   var overlay=document.getElementById('overlay');
   var slidePanel=document.getElementById('slidePanel');
@@ -388,7 +385,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
       sessionStorage.setItem('dd_admin','1');
       loginScreen.style.display='none';
       appShell.style.display='flex';
-      dendealIframe.src='https://dendeal.kr';
       toast('로그인되었습니다');
     } else {
       loginErr.textContent='아이디 또는 비밀번호가 올바르지 않습니다.';
@@ -465,7 +461,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   if(sessionStorage.getItem('dd_admin')==='1'){
     loginScreen.style.display='none';
     appShell.style.display='flex';
-    dendealIframe.src='https://dendeal.kr';
   }
 })();
 </script>
